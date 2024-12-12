@@ -16,18 +16,18 @@ public class SizeLongestSubarrayContainingSingle0 {
       throw new IllegalArgumentException("input must be a non-empty array of positive integers");
 
     int size = 0;
-    int i = 0;
+    int left = 0;
     int zeroCount = 0;
 
-    for (int j = 0; j < input.length; j++) {
-      if (input[j] == 0) zeroCount++;
+    for (int right = 0; right < input.length; right++) {
+      if (input[right] == 0) zeroCount++;
 
-      while (zeroCount > 1 && i < input.length) {
-        if (input[i] == 0) zeroCount--;
-        i++;
+      while (zeroCount > 1) {
+        if (input[left] == 0) zeroCount--;
+        left++;
       }
 
-      size = Math.max(size, j - i + 1);
+      size = Math.max(size, right - left + 1);
     }
 
     return size;
