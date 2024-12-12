@@ -1,6 +1,6 @@
 package algorithms;
 
-public class SizeLongestSubarrayTargetSum {
+public class SizeLongestSubarraySumLessThanTarget {
 
   /**
    * linear time complexity
@@ -8,13 +8,13 @@ public class SizeLongestSubarrayTargetSum {
    * constant space
    *
    * @param input
-   *     an array of positive integers
-   * @param sum
+   *     a non-empty array of positive integers
+   * @param target
    *     any integer value
    * @return the size of the longest subarray of the input array whose values sum is less than the
-   *     specified sum
+   *     specified target
    */
-  public static int size(int[] input, int sum) {
+  public static int size(int[] input, int target) {
     if (input == null || input.length == 0)
       throw new IllegalArgumentException("input must be a non-empty array of positive integers");
 
@@ -25,7 +25,7 @@ public class SizeLongestSubarrayTargetSum {
     for (int right = 0; right < input.length; right++) {
       currentSum += input[right];
 
-      while (currentSum > sum && left < input.length) {
+      while (currentSum > target && left < input.length) {
         currentSum -= input[left];
         left++;
       }

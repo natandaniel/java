@@ -8,7 +8,7 @@ public class SizeLongestSubarrayContainingSingle0 {
    * constant space
    *
    * @param input
-   *     an array of 0s and 1s
+   *     a non-empty array of 0s and 1s
    * @return the size of the longest subarray containing a single 0
    */
   public static int size(byte[] input) {
