@@ -17,6 +17,7 @@
 
     <modules>
         <module>../algorithms</module>
+        <module>../threads</module>
     </modules>
 
     <dependencyManagement>
