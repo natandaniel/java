@@ -1,33 +1,27 @@
 package threads;
 
 /**
- * Demonstrates the concurrent access of the main thread and two other threads to the system
- * output.
- * <p>
- * Each derived thread tries to print a character a certain amount of times, the first having
- * minimum priority, the second having maximum priority.
- * <p>
- * The final print illustrates how the system scheduler balanced CPU time between all threads.
- * <p>
- * Each execution of the main method gives a different print, illustrating the non-deterministic
- * nature of execution time allocation.
- * <p>
- * The program ends when all threads are done.
+ * A variation of <code>ConcurrentSystemOutputPrint</code> where threads 0 and 1 have maximum
+ * priority and the main thread has minimum priority.
+ *
+ * @see ConcurrentSystemOutputPrint
  */
 public class ConcurrentSystemOutputPrintWithPriority {
 
   public static void main(String[] args) {
-    Thread concurrentThread1 = new Thread(new PrintCharacter('1', 50));
-    concurrentThread1.setPriority(Thread.MIN_PRIORITY);
+    System.out.print("-start-");
 
-    Thread concurrentThread2 = new Thread(new PrintCharacter('2', 50));
-    concurrentThread2.setPriority(Thread.MAX_PRIORITY);
+    Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 
-    concurrentThread1.start();
-    concurrentThread2.start();
+    Thread thread0 = new Thread(new PrintCharToStdOut('0', 50));
+    thread0.setPriority(Thread.MAX_PRIORITY);
+    thread0.start();
 
-    System.out.print("-[main-thread-end]-");
-    System.out.flush();
+    Thread thread1 = new Thread(new PrintCharToStdOut('1', 50));
+    thread1.setPriority(Thread.MAX_PRIORITY);
+    thread1.start();
+
+    System.out.print("-end-");
   }
 
 }

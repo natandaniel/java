@@ -1,34 +1,33 @@
 package threads;
 
 /**
- * Demonstrates the concurrent access of the main thread and two other threads to the system
- * output.
+ * A variation of <code>ConcurrentSystemOutputPrintWithJoin</code> and
+ * <code>ConcurrentSystemOutputPrintWithSleep</code> where the main thread
+ * joins thread 0 for 1s and thread 1 for 3s.
  * <p>
- * Each derived thread tries to print a character a certain amount of times.
+ * The main thread will therefore wait for 4s before being runnable once more.
  * <p>
- * The main thread waits 1ms for the first started derived thread to finish its execution before
- * starting the second thread and completing its own final print.
- * <p>
- * The final print illustrates how the system scheduler balanced CPU time between all threads.
- * <p>
- * Each execution of the main method gives a different print, illustrating the non-deterministic
- * nature of execution time allocation.
- * <p>
- * The program ends when all threads are done.
+ * Threads 0 and 1 print 50 characters with a 100ms delay between each character, requiring 5s each
+ * at minimum to complete.
+ *
+ * @see ConcurrentSystemOutputPrintWithJoin
+ * @see ConcurrentSystemOutputPrintWithSleep
  */
 public class ConcurrentSystemOutputPrintWithTimedJoin {
 
   public static void main(String[] args) throws InterruptedException {
-    Thread concurrentThread1 = new Thread(new PrintCharacter('1', 50));
-    Thread concurrentThread2 = new Thread(new PrintCharacter('2', 50));
+    System.out.print("-start-");
 
-    concurrentThread1.start();
-    concurrentThread1.join(1);
+    Thread thread0 = new Thread(new PrintCharToStdOutWithSleep('0', 50, 100));
+    thread0.start();
 
-    concurrentThread2.start();
+    Thread thread1 = new Thread(new PrintCharToStdOutWithSleep('1', 50, 100));
+    thread1.start();
 
-    System.out.print("-[main-thread-end]-");
-    System.out.flush();
+    thread0.join(1000);
+    thread1.join(3000);
+
+    System.out.print("-end-");
   }
 
 }

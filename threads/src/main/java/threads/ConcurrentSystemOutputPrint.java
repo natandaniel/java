@@ -1,14 +1,17 @@
 package threads;
 
 /**
- * Demonstrates the concurrent access of the main thread and two other threads to the system
- * output.
+ * Three concurrent threads printing to the standard output, the main thread and two threads created
+ * by the main thread.
  * <p>
- * Each derived thread tries to print a character a certain amount of times.
+ * The main thread prints "-start-", starts threads 0 and 1 then prints "-end-".
  * <p>
- * The final print illustrates how the system scheduler balanced CPU time between all threads.
+ * Threads 0 and 1 respectively print characters '0' and '0' 50 times each.
  * <p>
- * Each execution of the main method gives a different print, illustrating the non-deterministic
+ * The final display in the standard output illustrates how the system scheduler balanced CPU time
+ * between all threads.
+ * <p>
+ * Each execution of the main method gives a different display, illustrating the non-deterministic
  * nature of execution time allocation.
  * <p>
  * The program ends when all threads are done.
@@ -16,14 +19,13 @@ package threads;
 public class ConcurrentSystemOutputPrint {
 
   public static void main(String[] args) {
-    Thread concurrentThread1 = new Thread(new PrintCharacter('1', 50));
-    Thread concurrentThread2 = new Thread(new PrintCharacter('2', 50));
+    System.out.print("-start-");
 
-    concurrentThread1.start();
-    concurrentThread2.start();
+    new Thread(new PrintCharToStdOut('0', 50)).start();
 
-    System.out.print("-[main-thread-end]-");
-    System.out.flush();
+    new Thread(new PrintCharToStdOut('0', 50)).start();
+
+    System.out.print("-end-");
   }
 
 }

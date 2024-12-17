@@ -1,44 +1,32 @@
 package threads;
 
 /**
- * Demonstrates the concurrent access of the main thread and two other threads to the system
- * output.
+ * A variation of <code>ConcurrentSystemOutputPrintWithDaemons</code>.
  * <p>
- * Each derived thread tries to print a character a certain amount of times, one yielding its
- * CPU access.
+ * After starting both threads 0 and 1, and before printing "-end-", the main thread yields it CPU
+ * access. This may or may not result in the scheduler giving priority to threads 0 and 1.
  * <p>
- * The final print illustrates how the system scheduler balanced CPU time between all threads.
- * <p>
- * Each execution of the main method gives a different print, illustrating the non-deterministic
- * nature of execution time allocation.
- * <p>
- * The program ends when all threads are done.
+ * The final display in the standard output may show more '0' and '1' characters than that of
+ * <code>ConcurrentSystemOutputPrintWithDaemons</code>.
+ *
+ * @see ConcurrentSystemOutputPrintWithDaemons
  */
 public class ConcurrentSystemOutputPrintWithYield {
 
   public static void main(String[] args) {
-    Thread concurrentThread1 = new Thread(new PrintCharacterWithYield('1', 50));
-    Thread concurrentThread2 = new Thread(new PrintCharacter('2', 50));
+    System.out.print("-start-");
 
-    concurrentThread1.start();
-    concurrentThread2.start();
+    Thread thread0 = new Thread(new PrintCharToStdOut('0', 50));
+    thread0.setDaemon(true);
+    thread0.start();
 
-    System.out.print("-[main-thread-end]-");
-    System.out.flush();
-  }
+    Thread thread1 = new Thread(new PrintCharToStdOut('1', 50));
+    thread1.setDaemon(true);
+    thread1.start();
 
-  private record PrintCharacterWithYield(char characterToPrint, int numberOfPrints)
-      implements Runnable {
+    Thread.yield();
 
-    @Override
-    public void run() {
-      Thread.yield();
-
-      for (int i = 1; i <= numberOfPrints; i++) {
-        System.out.print(characterToPrint);
-        System.out.flush(); // forcing the display of the character to print
-      }
-    }
+    System.out.print("-end-");
   }
 
 }

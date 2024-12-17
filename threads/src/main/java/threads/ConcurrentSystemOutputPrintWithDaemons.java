@@ -1,32 +1,29 @@
 package threads;
 
 /**
- * Demonstrates the concurrent access of the main thread and two daemon threads to the system
- * output.
+ * A variation of <code>ConcurrentSystemOutputPrint</code> where threads 0 and 1 are daemon threads.
  * <p>
- * Each derived thread tries to print a character a certain amount of times.
+ * Because threads 0 and 1 are daemons, the program ends when the main thread ends.
  * <p>
- * The final print illustrates how the system scheduler balanced CPU time between all threads.
- * <p>
- * Each execution of the main method gives a different print, illustrating the non-deterministic
- * nature of execution time allocation.
- * <p>
- * The program ends when the main thread ends even if the daemon threads are still running.
+ * The final display in the standard output may or may not show characters '0' and '1' printed 50
+ * times each.
+ *
+ * @see ConcurrentSystemOutputPrint
  */
 public class ConcurrentSystemOutputPrintWithDaemons {
 
   public static void main(String[] args) {
-    Thread concurrentThread1 = new Thread(new PrintCharacter('1', 50));
-    concurrentThread1.setDaemon(true);
+    System.out.print("-start-");
 
-    Thread concurrentThread2 = new Thread(new PrintCharacter('2', 50));
-    concurrentThread2.setDaemon(true);
+    Thread thread0 = new Thread(new PrintCharToStdOut('0', 50));
+    thread0.setDaemon(true);
+    thread0.start();
 
-    concurrentThread1.start();
-    concurrentThread2.start();
+    Thread thread1 = new Thread(new PrintCharToStdOut('1', 50));
+    thread1.setDaemon(true);
+    thread1.start();
 
-    System.out.print("-[main-thread-end]-");
-    System.out.flush();
+    System.out.print("-end-");
   }
 
 }
