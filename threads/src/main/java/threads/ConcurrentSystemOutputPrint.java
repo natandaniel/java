@@ -23,7 +23,7 @@ public class ConcurrentSystemOutputPrint {
 
     new Thread(new PrintCharToStdOut('0', 50)).start();
 
-    new Thread(new PrintCharToStdOut('0', 50)).start();
+    new Thread(new PrintCharToStdOut('1', 50)).start();
 
     System.out.print("-end-");
   }
