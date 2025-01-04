@@ -18,6 +18,7 @@
     <modules>
         <module>../algorithms</module>
         <module>../threads</module>
+        <module>../design-patterns</module>
     </modules>
 
     <dependencyManagement>
