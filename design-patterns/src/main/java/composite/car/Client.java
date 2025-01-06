@@ -8,11 +8,11 @@ public class Client {
   public static void main(String[] args) {
     CarComponent car = new CompositeCarComponent(CarComponentType.CAR, "MyCar");
 
-    CompositeCarComponent chassis =
+    CarComponent chassis =
         new CompositeCarComponent(CarComponentType.CHASSIS, "Chassis");
     chassis.add(new IndividualCarComponent(CarComponentType.FRAME, "Frame"));
 
-    CompositeCarComponent body =
+    CarComponent body =
         new CompositeCarComponent(CarComponentType.BODY, "Body");
 
     for (String doorName :
