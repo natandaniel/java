@@ -33,6 +33,7 @@ public class AppConfiguration {
   public JdbcTemplate mysqlJdbcTemplate() throws IOException {
     JdbcTemplate jdbcTemplate = new JdbcTemplate(mysqlDataSource());
     initDatabaseAndTablesIfAbsent(jdbcTemplate);
+    populateTablesWithDefaultDataIfMissing(jdbcTemplate);
     return jdbcTemplate;
   }
 
@@ -47,9 +48,14 @@ public class AppConfiguration {
   }
 
   private static void initDatabaseAndTablesIfAbsent(JdbcTemplate jdbcTemplate) throws IOException {
+    executeSqlStatements(jdbcTemplate, "coffees/create-tables.sql");
+  }
+
+  private static void executeSqlStatements(
+      JdbcTemplate jdbcTemplate,
+      String resourceSqlFilePath) throws IOException {
     try (InputStream inputStream = AppConfiguration.class.getClassLoader()
-                                                         .getResourceAsStream(
-                                                             "coffees/create-tables.sql");
+                                                         .getResourceAsStream(resourceSqlFilePath);
         BufferedReader reader = new BufferedReader(
             new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
 
@@ -67,5 +73,10 @@ public class AppConfiguration {
         }
       }
     }
+  }
+
+  private static void populateTablesWithDefaultDataIfMissing(JdbcTemplate jdbcTemplate)
+      throws IOException {
+    executeSqlStatements(jdbcTemplate, "coffees/populate-tables.sql");
   }
 }
