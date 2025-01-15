@@ -1,12 +1,22 @@
 ## Introduction
 
 In this module, I experiment with the Spring Framework's support for data access
-with <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/">JDBC</a> (Java Database Connectivity).
+with the <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/">JDBC API</a> (Java Database
+Connectivity).
 
-The used artifacts are:
+The JDBC API is a low-level Java API enabling the access to the data stored in relational databases.
+
+It allows Java programs to:
+<ul>
+<li>connect to a database</li>
+<li>execute SQL statements</li>
+<li>retrieve and process the results received from the database in response to a SQL statement</li>
+</ul>
+
+I have declared the following artifacts as dependencies:
 <ul>
 <li>spring-context: to use Spring's IoC container for Dependency Injection</li>
-<li>spring-jdbc: to use Spring's client classes built on top of the JDBC API</li>
+<li>spring-jdbc: to use Spring's abstraction of the JDBC API</li>
 <li>mysql-connector-j: to be able to use the JDBC API with the MySQL DBMS (Database Management System)</li>
 </ul>
 
