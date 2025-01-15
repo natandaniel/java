@@ -11,8 +11,9 @@ It allows Java programs to:
 </ul>
 
 
-The Spring Framework provides JDBC support classes *JdbcTemplate*, *NamedParameterJdbcTemplate* and *JdbcClient* that
-build on top of the JDBC API's main database connectivity interface, *DataSource*.
+The Spring Framework provides JDBC support classes **JdbcTemplate**, **NamedParameterJdbcTemplate** and **JdbcClient**
+that
+build on top of the JDBC API's main database connectivity interface, **DataSource**.
 
 In this module, I experiment the Spring Framework's support for data access with JDBC.
 
