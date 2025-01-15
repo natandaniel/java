@@ -1,6 +1,6 @@
 ## Introduction
 
-The <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/">the JDBC API</a> (Java Database
+<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/">The JDBC API</a> (Java Database
 Connectivity) is a low-level Java API enabling the access to and management of data stored in relational databases.
 
 It allows Java programs to:
