@@ -7,13 +7,10 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,12 +26,13 @@ class JdbcTemplateQueryingTests {
 
   @BeforeAll
   void setUp() {
-    createAndPopulateTables(mysqlJdbcTemplate.getDataSource());
+    TestUtility.executeSqlScripts(mysqlJdbcTemplate.getDataSource(), "create-tables.sql",
+        "populate-tables.sql");
   }
 
   @AfterAll
   void cleanUp() {
-    dropTables(mysqlJdbcTemplate.getDataSource());
+    TestUtility.executeSqlScripts(mysqlJdbcTemplate.getDataSource(), "drop-tables.sql");
   }
 
   // getting row counts in the relations
@@ -138,20 +136,6 @@ class JdbcTemplateQueryingTests {
 
     assertNotNull(coffees);
     assertEquals(5, coffees.size());
-  }
-
-  private void createAndPopulateTables(DataSource dataSource) {
-    ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-    populator.addScripts(
-        new ClassPathResource("create-tables.sql"),
-        new ClassPathResource("populate-tables.sql"));
-    populator.execute(dataSource);
-  }
-
-  private void dropTables(DataSource dataSource) {
-    ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-    populator.addScripts(new ClassPathResource("drop-tables.sql"));
-    populator.execute(dataSource);
   }
 
 }
