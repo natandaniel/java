@@ -1,5 +1,7 @@
 package jdbc;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,17 +22,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) // This allows non-static @BeforeAll and @AfterAll
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { MultiDataSourceJdbcTemplateConfiguration.class })
-class JdbcTemplateIntegrationTests {
+class JdbcTemplateQueryingTests {
   @Autowired
   @Qualifier("mysql")
   private JdbcTemplate mysqlJdbcTemplate;
 
-  //@BeforeAll
+  @BeforeAll
   void setUp() {
     createAndPopulateTables(mysqlJdbcTemplate.getDataSource());
   }
 
-  //@AfterAll
+  @AfterAll
   void cleanUp() {
     dropTables(mysqlJdbcTemplate.getDataSource());
   }
@@ -38,31 +40,31 @@ class JdbcTemplateIntegrationTests {
   // getting row counts in the relations
 
   @Test
-  void testSuppliersRowCount() {
+  void testCountOfSuppliersTable() {
     assertEquals(5, mysqlJdbcTemplate.queryForObject("select count(*) from SUPPLIERS",
         Integer.class));
   }
 
   @Test
-  void testCoffeesRowCount() {
+  void testCountOfCoffeesTable() {
     assertEquals(5, mysqlJdbcTemplate.queryForObject("select count(*) from COFFEES",
         Integer.class));
   }
 
   @Test
-  void testCofInventoryRowCount() {
+  void testCountOfCofInventoryTable() {
     assertEquals(4, mysqlJdbcTemplate.queryForObject("select count(*) from COF_INVENTORY",
         Integer.class));
   }
 
   @Test
-  void testMerchInventoryRowCount() {
+  void testCountOfMerchInventoryTable() {
     assertEquals(12, mysqlJdbcTemplate.queryForObject("select count(*) from MERCH_INVENTORY",
         Integer.class));
   }
 
   @Test
-  void testCoffeeHousesRowCount() {
+  void testCountOfCoffeeHousesTable() {
     assertEquals(14, mysqlJdbcTemplate.queryForObject("select count(*) from COFFEE_HOUSES",
         Integer.class));
   }
@@ -70,35 +72,35 @@ class JdbcTemplateIntegrationTests {
   // getting row counts in the relations using a bind variable
 
   @Test
-  void testSuppliersRowCountWhereZipIs93966() {
+  void testSuppliersCountWithZip93966() {
     assertEquals(2,
         mysqlJdbcTemplate.queryForObject("select count(*) from SUPPLIERS where zip = ?",
             Integer.class, 93966));
   }
 
   @Test
-  void testCoffeesRowCountWhereSupIdIs101() {
+  void testCoffeesCountWithSupId101() {
     assertEquals(2,
         mysqlJdbcTemplate.queryForObject("select count(*) from COFFEES where sup_id = ?",
             Integer.class, 101));
   }
 
   @Test
-  void testCofInventoryRowCountWhereSupIdIs101() {
+  void testCofInventoryCountWithSupId101() {
     assertEquals(2,
         mysqlJdbcTemplate.queryForObject("select count(*) from COF_INVENTORY where sup_id = ?",
             Integer.class, 101));
   }
 
   @Test
-  void testMerchInventoryRowCountWhereSupIdIs456() {
+  void testMerchInventoryCountWithSupId456() {
     assertEquals(7,
         mysqlJdbcTemplate.queryForObject("select count(*) from MERCH_INVENTORY where sup_id = ?",
             Integer.class, 456));
   }
 
   @Test
-  void testCoffeeHousesRowCountWhereCityIsSF() {
+  void testCoffeeHousesCountWithCitySF() {
     assertEquals(3,
         mysqlJdbcTemplate.queryForObject("select count(*) from COFFEE_HOUSES where city = ?",
             Integer.class, "SF"));
@@ -107,7 +109,7 @@ class JdbcTemplateIntegrationTests {
   // getting a String
 
   @Test
-  void testCoffeeHouseCityWhereStoreIdIs10023() {
+  void testCityOfCoffeeHouseWithStoreId10023() {
     assertEquals("Mendocino",
         mysqlJdbcTemplate.queryForObject("select city from COFFEE_HOUSES where store_id = ?",
             String.class, 10023));
@@ -116,7 +118,7 @@ class JdbcTemplateIntegrationTests {
   // populating domain objects
 
   @Test
-  void testPopulateCoffee() {
+  void testRetrieveAndPopulateCoffeeByName() {
     Coffee coffee = mysqlJdbcTemplate.queryForObject("select cof_name, price from COFFEES " +
             "where cof_name = ?",
         (resultSet, rowNum) ->
@@ -129,7 +131,7 @@ class JdbcTemplateIntegrationTests {
   }
 
   @Test
-  void testPopulateCoffeeList() {
+  void testRetrieveAndPopulateCoffeeList() {
     List<Coffee> coffees = mysqlJdbcTemplate.query("select cof_name, price from COFFEES",
         (resultSet, rowNum) ->
             new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")));
