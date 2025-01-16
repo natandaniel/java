@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) // This allows non-static @BeforeAll and @AfterAll
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { MultiDataSourceJdbcTemplateConfiguration.class })
+@ContextConfiguration(classes = { JdbcConfiguration.class })
 class JdbcTemplateQueryingTests {
   @Autowired
-  @Qualifier("mysql")
+  @Qualifier("mysqlJdbcTemplate")
   private JdbcTemplate mysqlJdbcTemplate;
 
   @BeforeAll

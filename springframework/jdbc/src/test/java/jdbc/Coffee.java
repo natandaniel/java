@@ -1,19 +1,19 @@
 package jdbc;
 
-class Coffee {
+public class Coffee {
   private final String name;
   private final float price;
 
-  Coffee(String name, float price) {
+  public Coffee(String name, float price) {
     this.name = name;
     this.price = price;
   }
 
-  String getName() {
+  public String getName() {
     return name;
   }
 
-  float getPrice() {
+  public float getPrice() {
     return price;
   }
 }

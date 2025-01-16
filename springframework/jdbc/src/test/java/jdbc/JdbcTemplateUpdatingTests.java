@@ -14,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { MultiDataSourceJdbcTemplateConfiguration.class })
+@ContextConfiguration(classes = { JdbcConfiguration.class })
 public class JdbcTemplateUpdatingTests {
   @Autowired
-  @Qualifier("mysql")
+  @Qualifier("mysqlJdbcTemplate")
   private JdbcTemplate mysqlJdbcTemplate;
 
   @BeforeEach

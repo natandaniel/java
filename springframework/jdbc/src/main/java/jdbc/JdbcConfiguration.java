@@ -7,10 +7,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.simple.JdbcClient;
 
 @Configuration
 @PropertySource("classpath:jdbc/database.properties")
-public class MultiDataSourceJdbcTemplateConfiguration {
+public class JdbcConfiguration {
   @Value("${mysql.host}")
   private String mysqlDatabaseHost;
   @Value("${mysql.dbname}")
@@ -21,9 +23,21 @@ public class MultiDataSourceJdbcTemplateConfiguration {
   private String mysqlDatabaseUserPassword;
 
   @Bean
-  @Qualifier("mysql")
+  @Qualifier("mysqlNamedParameterJdbcTemplate")
+  public NamedParameterJdbcTemplate mysqlNamedParameterJdbcTemplate() {
+    return new NamedParameterJdbcTemplate(mysqlDataSource());
+  }
+
+  @Bean
+  @Qualifier("mysqlJdbcTemplate")
   public JdbcTemplate mysqlJdbcTemplate() {
     return new JdbcTemplate(mysqlDataSource());
+  }
+
+  @Bean
+  @Qualifier("mysqlJdbcClient")
+  public JdbcClient mysqlJdbcClient() {
+    return JdbcClient.create(mysqlDataSource());
   }
 
   @Bean
