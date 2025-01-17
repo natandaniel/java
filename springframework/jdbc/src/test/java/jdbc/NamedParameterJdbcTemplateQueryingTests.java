@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
@@ -36,6 +37,41 @@ class NamedParameterJdbcTemplateQueryingTests {
   void cleanUp() {
     TestUtility.executeSqlScripts(mysqlNamedParameterJdbcTemplate.getJdbcTemplate().getDataSource(),
         "drop-tables.sql");
+  }
+
+  // getting row counts in the relations
+
+  @Test
+  void testCountOfSuppliersTable() {
+    assertEquals(5, mysqlNamedParameterJdbcTemplate.queryForObject("select count(*) from SUPPLIERS",
+        EmptySqlParameterSource.INSTANCE, Integer.class));
+  }
+
+  @Test
+  void testCountOfCoffeesTable() {
+    assertEquals(5, mysqlNamedParameterJdbcTemplate.queryForObject("select count(*) from COFFEES",
+        EmptySqlParameterSource.INSTANCE, Integer.class));
+  }
+
+  @Test
+  void testCountOfCofInventoryTable() {
+    assertEquals(4,
+        mysqlNamedParameterJdbcTemplate.queryForObject("select count(*) from COF_INVENTORY",
+            EmptySqlParameterSource.INSTANCE, Integer.class));
+  }
+
+  @Test
+  void testCountOfMerchInventoryTable() {
+    assertEquals(12,
+        mysqlNamedParameterJdbcTemplate.queryForObject("select count(*) from MERCH_INVENTORY",
+            EmptySqlParameterSource.INSTANCE, Integer.class));
+  }
+
+  @Test
+  void testCountOfCoffeeHousesTable() {
+    assertEquals(14,
+        mysqlNamedParameterJdbcTemplate.queryForObject("select count(*) from COFFEE_HOUSES",
+            EmptySqlParameterSource.INSTANCE, Integer.class));
   }
 
   // getting row counts in the relations using a parameter
@@ -103,14 +139,14 @@ class NamedParameterJdbcTemplateQueryingTests {
     Coffee coffee =
         mysqlNamedParameterJdbcTemplate.queryForObject(
             "select cof_name, price from COFFEES where cof_name = :name",
-            new BeanPropertySqlParameterSource(new Coffee("Colombian", 7.99f)),
+            new BeanPropertySqlParameterSource(new Coffee("Colombian", 49, 7.99f, 0, 0)),
             (resultSet, rowNum) ->
-                new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price"))
+                new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0)
         );
 
     assertNotNull(coffee);
     assertEquals("Colombian", coffee.getName());
-    assertEquals(7.99, coffee.getPrice(), 0.01);
+    assertEquals(7.99f, coffee.getPrice());
   }
 
   @Test
@@ -118,7 +154,7 @@ class NamedParameterJdbcTemplateQueryingTests {
     List<Coffee> coffees =
         mysqlNamedParameterJdbcTemplate.query("select cof_name, price from COFFEES",
             (resultSet, rowNum) ->
-                new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")));
+                new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0));
 
     assertNotNull(coffees);
     assertEquals(5, coffees.size());

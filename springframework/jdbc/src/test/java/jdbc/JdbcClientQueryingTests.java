@@ -39,7 +39,39 @@ class JdbcClientQueryingTests {
     TestUtility.executeSqlScripts(mysqlDataSource, "drop-tables.sql");
   }
 
-  // getting row counts in the relations using a parameter
+  // getting row counts in the relations
+
+  @Test
+  void testCountOfSuppliersTable() {
+    assertEquals(5,
+        mysqlJdbcClient.sql("select count(*) from SUPPLIERS").query(Integer.class).single());
+  }
+
+  @Test
+  void testCountOfCoffeesTable() {
+    assertEquals(5,
+        mysqlJdbcClient.sql("select count(*) from COFFEES").query(Integer.class).single());
+  }
+
+  @Test
+  void testCountOfCofInventoryTable() {
+    assertEquals(4,
+        mysqlJdbcClient.sql("select count(*) from COF_INVENTORY").query(Integer.class).single());
+  }
+
+  @Test
+  void testCountOfMerchInventoryTable() {
+    assertEquals(12,
+        mysqlJdbcClient.sql("select count(*) from MERCH_INVENTORY").query(Integer.class).single());
+  }
+
+  @Test
+  void testCountOfCoffeeHousesTable() {
+    assertEquals(14,
+        mysqlJdbcClient.sql("select count(*) from COFFEE_HOUSES").query(Integer.class).single());
+  }
+
+  // getting row counts in the relations using a bind variable or a named parameter
 
   @Test
   void testSuppliersCountWithZip93966() {
@@ -105,7 +137,8 @@ class JdbcClientQueryingTests {
         mysqlJdbcClient.sql("select cof_name, price from COFFEES where cof_name = :name")
                        .param("name", "Colombian")
                        .query((resultSet, rowNum) ->
-                           new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")))
+                           new Coffee(resultSet.getString("cof_name"), 49,
+                               resultSet.getFloat("price"), 0, 0))
                        .single();
 
     assertNotNull(coffee);
@@ -118,7 +151,8 @@ class JdbcClientQueryingTests {
     List<Coffee> coffees =
         mysqlJdbcClient.sql("select cof_name, price from COFFEES")
                        .query((resultSet, rowNum) ->
-                           new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")))
+                           new Coffee(resultSet.getString("cof_name"), 49,
+                               resultSet.getFloat("price"), 0, 0))
                        .list();
 
     assertNotNull(coffees);

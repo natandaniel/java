@@ -51,7 +51,7 @@ public class JdbcTemplateUpdatingTests {
     Coffee coffee =
         mysqlJdbcTemplate.queryForObject("select cof_name, price from COFFEES where cof_name = ?",
             (resultSet, rowNum) ->
-                new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")),
+                new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0),
             "Ethiopian");
 
     assertNotNull(coffee);
@@ -70,7 +70,7 @@ public class JdbcTemplateUpdatingTests {
     Coffee coffee =
         mysqlJdbcTemplate.queryForObject("select cof_name, price from COFFEES where cof_name = ?",
             (resultSet, rowNum) ->
-                new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")),
+                new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0),
             "Colombian");
 
     assertNotNull(coffee);
@@ -94,10 +94,10 @@ public class JdbcTemplateUpdatingTests {
   @Test
   void testInsertCoffeeRecordBatch() {
     List<Coffee> coffeeBatch = new ArrayList<>();
-    coffeeBatch.add(new Coffee("Coffee1", 1.99f));
-    coffeeBatch.add(new Coffee("Coffee2", 1.99f));
-    coffeeBatch.add(new Coffee("Coffee3", 1.99f));
-    coffeeBatch.add(new Coffee("Coffee4", 1.99f));
+    coffeeBatch.add(new Coffee("Coffee1", 49, 1.99f, 0, 0));
+    coffeeBatch.add(new Coffee("Coffee2", 49, 1.99f, 0, 0));
+    coffeeBatch.add(new Coffee("Coffee3", 49, 1.99f, 0, 0));
+    coffeeBatch.add(new Coffee("Coffee4", 49, 1.99f, 0, 0));
 
     mysqlJdbcTemplate.batchUpdate(
         "insert into COFFEES (cof_name, sup_id, price, sales, total) values (?, ?, ?, ?, ?)",
@@ -124,7 +124,76 @@ public class JdbcTemplateUpdatingTests {
     Coffee coffee =
         mysqlJdbcTemplate.queryForObject("select cof_name, price from COFFEES where cof_name = ?",
             (resultSet, rowNum) ->
-                new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")),
+                new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0),
+            "Coffee3");
+
+    assertNotNull(coffee);
+    assertEquals("Coffee3", coffee.getName());
+    assertEquals(1.99f, coffee.getPrice());
+  }
+
+  @Test
+  void testInsertCoffeeRecordBatchV2() {
+    List<Coffee> coffeeBatch = new ArrayList<>();
+    coffeeBatch.add(new Coffee("Coffee1", 49, 1.99f, 0, 0));
+    coffeeBatch.add(new Coffee("Coffee2", 49, 1.99f, 0, 0));
+    coffeeBatch.add(new Coffee("Coffee3", 49, 1.99f, 0, 0));
+    coffeeBatch.add(new Coffee("Coffee4", 49, 1.99f, 0, 0));
+
+    List<Object[]> batch = new ArrayList<>();
+    coffeeBatch.forEach(coffee -> batch.add(new Object[] {
+        coffee.getName(),
+        coffee.getSupId(),
+        coffee.getPrice(),
+        coffee.getSales(),
+        coffee.getTotal() }));
+
+    mysqlJdbcTemplate.batchUpdate(
+        "insert into COFFEES (cof_name, sup_id, price, sales, total) values (?, ?, ?, ?, ?)",
+        batch);
+
+    assertEquals(9, mysqlJdbcTemplate.queryForObject("select count(*) from COFFEES",
+        Integer.class));
+
+    Coffee coffee =
+        mysqlJdbcTemplate.queryForObject("select cof_name, price from COFFEES where cof_name = ?",
+            (resultSet, rowNum) ->
+                new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0),
+            "Coffee3");
+
+    assertNotNull(coffee);
+    assertEquals("Coffee3", coffee.getName());
+    assertEquals(1.99f, coffee.getPrice());
+  }
+
+  @Test
+  void testInsertCoffeeRecordMultipleBatches() {
+    List<Coffee> coffeeBatch = new ArrayList<>();
+    coffeeBatch.add(new Coffee("Coffee1", 49, 1.99f, 0, 0));
+    coffeeBatch.add(new Coffee("Coffee2", 49, 1.99f, 0, 0));
+    coffeeBatch.add(new Coffee("Coffee3", 49, 1.99f, 0, 0));
+    coffeeBatch.add(new Coffee("Coffee4", 49, 1.99f, 0, 0));
+
+    mysqlJdbcTemplate.batchUpdate(
+        "insert into COFFEES (cof_name, sup_id, price, sales, total) values (?, ?, ?, ?, ?)",
+        coffeeBatch,
+        2,
+        (PreparedStatement ps, Coffee coffee) -> {
+          ps.setString(1, coffee.getName());
+          ps.setInt(2, 49);
+          ps.setFloat(3, coffee.getPrice());
+          ps.setInt(4, 0);
+          ps.setInt(5, 0);
+        }
+    );
+
+    assertEquals(9, mysqlJdbcTemplate.queryForObject("select count(*) from COFFEES",
+        Integer.class));
+
+    Coffee coffee =
+        mysqlJdbcTemplate.queryForObject("select cof_name, price from COFFEES where cof_name = ?",
+            (resultSet, rowNum) ->
+                new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0),
             "Coffee3");
 
     assertNotNull(coffee);

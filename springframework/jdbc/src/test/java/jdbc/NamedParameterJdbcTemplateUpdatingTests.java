@@ -9,8 +9,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -59,11 +63,11 @@ public class NamedParameterJdbcTemplateUpdatingTests {
             "select cof_name, price from COFFEES where cof_name = :name",
             new MapSqlParameterSource("name", "Ethiopian"),
             (resultSet, rowNum) ->
-                new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")));
+                new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0));
 
     assertNotNull(coffee);
     assertEquals("Ethiopian", coffee.getName());
-    assertEquals(10.99, coffee.getPrice(), 0.01);
+    assertEquals(10.99f, coffee.getPrice());
   }
 
   // updating an existing entry
@@ -82,11 +86,11 @@ public class NamedParameterJdbcTemplateUpdatingTests {
             "select cof_name, price from COFFEES where cof_name = :name",
             new MapSqlParameterSource("name", "Colombian"),
             (resultSet, rowNum) ->
-                new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")));
+                new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0));
 
     assertNotNull(coffee);
     assertEquals("Colombian", coffee.getName());
-    assertEquals(8.99, coffee.getPrice(), 0.01);
+    assertEquals(8.99f, coffee.getPrice());
   }
 
   // deleting an existing entry
@@ -99,6 +103,37 @@ public class NamedParameterJdbcTemplateUpdatingTests {
     assertEquals(13, namedParameterJdbcTemplate.queryForObject("select count(*) from COFFEE_HOUSES",
         EmptySqlParameterSource.INSTANCE,
         Integer.class));
+  }
+
+  // batch insertions
+
+  @Test
+  void testInsertCoffeeRecordBatch() {
+    List<Coffee> coffeeBatch = new ArrayList<>();
+    coffeeBatch.add(new Coffee("Coffee1", 49, 1.99f, 0, 0));
+    coffeeBatch.add(new Coffee("Coffee2", 49, 1.99f, 0, 0));
+    coffeeBatch.add(new Coffee("Coffee3", 49, 1.99f, 0, 0));
+    coffeeBatch.add(new Coffee("Coffee4", 49, 1.99f, 0, 0));
+
+    namedParameterJdbcTemplate.batchUpdate(
+        "insert into COFFEES (cof_name, sup_id, price, sales, total) values (:name, :sup_id, " +
+            ":price, :sales, :total)",
+        SqlParameterSourceUtils.createBatch(coffeeBatch));
+
+    assertEquals(9, namedParameterJdbcTemplate.queryForObject("select count(*) from COFFEES",
+        EmptySqlParameterSource.INSTANCE,
+        Integer.class));
+
+    Coffee coffee =
+        namedParameterJdbcTemplate.queryForObject(
+            "select cof_name, price from COFFEES where cof_name = :name",
+            new MapSqlParameterSource("name", "Coffee3"),
+            (resultSet, rowNum) ->
+                new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0));
+
+    assertNotNull(coffee);
+    assertEquals("Coffee3", coffee.getName());
+    assertEquals(1.99f, coffee.getPrice());
   }
 
 }

@@ -120,19 +120,19 @@ class JdbcTemplateQueryingTests {
     Coffee coffee = mysqlJdbcTemplate.queryForObject("select cof_name, price from COFFEES " +
             "where cof_name = ?",
         (resultSet, rowNum) ->
-            new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")),
+            new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0),
         "Colombian");
 
     assertNotNull(coffee);
     assertEquals("Colombian", coffee.getName());
-    assertEquals(7.99, coffee.getPrice(), 0.01);
+    assertEquals(7.99f, coffee.getPrice());
   }
 
   @Test
   void testRetrieveAndPopulateCoffeeList() {
     List<Coffee> coffees = mysqlJdbcTemplate.query("select cof_name, price from COFFEES",
         (resultSet, rowNum) ->
-            new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")));
+            new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0));
 
     assertNotNull(coffees);
     assertEquals(5, coffees.size());

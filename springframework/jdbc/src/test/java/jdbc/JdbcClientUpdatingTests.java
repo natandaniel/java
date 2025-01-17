@@ -55,12 +55,13 @@ public class JdbcClientUpdatingTests {
         mysqlJdbcClient.sql("select cof_name, price from COFFEES where cof_name = :name")
                        .param("name", "Ethiopian")
                        .query((resultSet, rowNum) ->
-                           new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")))
+                           new Coffee(resultSet.getString("cof_name"), 49,
+                               resultSet.getFloat("price"), 0, 0))
                        .single();
 
     assertNotNull(coffee);
     assertEquals("Ethiopian", coffee.getName());
-    assertEquals(10.99, coffee.getPrice(), 0.01);
+    assertEquals(10.99f, coffee.getPrice());
   }
 
   // updating an existing entry
@@ -76,12 +77,13 @@ public class JdbcClientUpdatingTests {
         mysqlJdbcClient.sql("select cof_name, price from COFFEES where cof_name = ?")
                        .param("Colombian")
                        .query((resultSet, rowNum) ->
-                           new Coffee(resultSet.getString("cof_name"), resultSet.getFloat("price")))
+                           new Coffee(resultSet.getString("cof_name"), 49,
+                               resultSet.getFloat("price"), 0, 0))
                        .single();
 
     assertNotNull(coffee);
     assertEquals("Colombian", coffee.getName());
-    assertEquals(8.99, coffee.getPrice(), 0.01);
+    assertEquals(8.99f, coffee.getPrice(), 0.01);
   }
 
   // deleting an existing entry
