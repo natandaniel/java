@@ -116,7 +116,7 @@ public class NamedParameterJdbcTemplateUpdatingTests {
     coffeeBatch.add(new Coffee("Coffee4", 49, 1.99f, 0, 0));
 
     namedParameterJdbcTemplate.batchUpdate(
-        "insert into COFFEES (cof_name, sup_id, price, sales, total) values (:name, :sup_id, " +
+        "insert into COFFEES (cof_name, sup_id, price, sales, total) values (:name, :supId, " +
             ":price, :sales, :total)",
         SqlParameterSourceUtils.createBatch(coffeeBatch));
 
