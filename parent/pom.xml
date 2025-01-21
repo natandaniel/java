@@ -19,7 +19,11 @@
         <module>../algorithms</module>
         <module>../threads</module>
         <module>../design-patterns</module>
-        <module>../springframework</module>
+        <module>../spring</module>
+        <module>../spring-data-jdbc</module>
+        <module>../spring-data-jpa</module>
+        <module>../spring-data-mongodb</module>
+        <module>../spring-data-cassandra</module>
     </modules>
 
     <dependencyManagement>

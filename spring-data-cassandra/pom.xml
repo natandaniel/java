@@ -10,26 +10,13 @@
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>springframework</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>jdbc</module>
-    </modules>
+    <artifactId>spring-data-cassandra</artifactId>
 
     <dependencies>
-        <!-- Spring IoC and component stereotypes. -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>6.2.1</version>
-        </dependency>
-
-        <!-- Spring testing. -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>6.2.1</version>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-cassandra</artifactId>
+            <version>4.4.2</version>
         </dependency>
     </dependencies>
 
