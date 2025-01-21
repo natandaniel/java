@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Repository
 public class JdbcCoffeeRepository {
-  private SimpleJdbcInsert simpleJdbcInsert;
+  private final SimpleJdbcInsert simpleJdbcInsert;
 
   public JdbcCoffeeRepository(MysqlDataSource mysqlDataSource) {
     simpleJdbcInsert = new SimpleJdbcInsert(mysqlDataSource).withTableName("COFFEES");
