@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) // This allows non-static @BeforeAll and @AfterAll
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { JdbcConfiguration.class })
-public class JdbcCoffeeRepositoryTest {
+public class JdbcCoffeeRepositoryQueryingTests {
   @Autowired
   DataSource dataSource;
   @Autowired
@@ -25,8 +25,7 @@ public class JdbcCoffeeRepositoryTest {
 
   @BeforeAll
   void setUp() {
-    TestUtility.executeSqlScripts(dataSource, "create-tables.sql",
-        "populate-tables.sql");
+    TestUtility.executeSqlScripts(dataSource, "create-tables.sql", "populate-tables.sql");
   }
 
   @AfterAll
@@ -61,7 +60,7 @@ public class JdbcCoffeeRepositoryTest {
   }
 
   @Test
-  void testRetrieveAndProjectNameAndPriceOfCoffeeByName() {
+  void testRetrieveAndProjectNameAndSupIdOfCoffeeByName() {
     CoffeeNameAndSupId coffeeNameAndSupId =
         jdbcCoffeeRepository.getCoffeeNameAndSupIdByName("Colombian");
     assertEquals("Colombian", coffeeNameAndSupId.getName());
