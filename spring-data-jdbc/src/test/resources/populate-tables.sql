@@ -1,44 +1,126 @@
-insert ignore into supplier values(49,  'Superior coffee', '1 Party Place', 'Mendocino', 'CA', '95460');
-insert ignore into supplier values(101, 'Acme, Inc.', '99 Market Street', 'Groundsville', 'CA', '95199');
-insert ignore into supplier values(150, 'The High Ground', '100 coffee Lane', 'Meadows', 'CA', '93966');
-insert ignore into supplier values(456, 'Restaurant Supplies, Inc.', '200 Magnolia Street', 'Meadows', 'CA', '93966');
-insert ignore into supplier values(927, 'Professional Kitchen', '300 Daisy Avenue', 'Groundsville', 'CA', '95199');
+INSERT INTO supplier (name) VALUES
+('GreenLeaf Supplies'),
+('Global Beans Inc.'),
+('BrewMasters Ltd.'),
+('Café Essentials Co.'),
+('BeanWorld Distributors'),
+('Golden Brew Supplies'),
+('Premium Roasters Inc.'),
+('Harvest Beans Suppliers'),
+('World of Coffee Traders'),
+('FreshBrew Co.');
 
-insert ignore into coffee values('Colombian',          101, 7.99, 0, 0);
-insert ignore into coffee values('French_Roast',       49,  8.99, 0, 0);
-insert ignore into coffee values('Espresso',           150, 9.99, 0, 0);
-insert ignore into coffee values('Colombian_Decaf',    101, 8.99, 0, 0);
-insert ignore into coffee values('French_Roast_Decaf', 049, 9.99, 0, 0);
+INSERT INTO product (id, name, price) VALUES 
+(1, 'Arabica Blend', 15.99),
+(2, 'Robusta Premium', 12.49),
+(3, 'Excelsa Light Roast', 14.99),
+(4, 'Liberica Specialty', 16.89);
 
-insert ignore into cof_inventory values(1234, 'Colombian',       101, 0, '2006-04-01');
-insert ignore into cof_inventory values(1234, 'French_Roast',    49,  0, '2006-04-01');
-insert ignore into cof_inventory values(1234, 'Espresso',        150, 0, '2006-04-01');
-insert ignore into cof_inventory values(1234, 'Colombian_Decaf', 101, 0, '2006-04-01');
+INSERT INTO coffee_beans (id, weight, coffee_bean_type, supplier_id) VALUES
+(1, 500, 'Arabica', 1),
+(2, 500, 'Robusta', 2),
+(3, 250, 'Excelsa', 3),
+(4, 500, 'Liberica', 4);
 
-insert ignore into merch_inventory values(00001234, 'Cup_Large', 456, 28, '2006-04-01');
-insert ignore into merch_inventory values(00001235, 'Cup_Small', 456, 36, '2006-04-01');
-insert ignore into merch_inventory values(00001236, 'Saucer', 456, 64, '2006-04-01');
-insert ignore into merch_inventory values(00001287, 'Carafe', 456, 12, '2006-04-01');
-insert ignore into merch_inventory values(00006931, 'Carafe', 927, 3, '2006-04-01');
-insert ignore into merch_inventory values(00006935, 'PotHolder', 927, 88, '2006-04-01');
-insert ignore into merch_inventory values(00006977, 'Napkin', 927, 108, '2006-04-01');
-insert ignore into merch_inventory values(00006979, 'Towel', 927, 24, '2006-04-01');
-insert ignore into merch_inventory values(00004488, 'CofMaker', 456, 5, '2006-04-01');
-insert ignore into merch_inventory values(00004490, 'CofGrinder', 456, 9, '2006-04-01');
-insert ignore into merch_inventory values(00004495, 'EspMaker', 456, 4, '2006-04-01');
-insert ignore into merch_inventory values(00006914, 'Cookbook', 927, 12, '2006-04-01');
+INSERT INTO product (id, name, price) VALUES
+(5, 'Black Coffee', 2.50),
+(6, 'Latte', 3.75),
+(7, 'Cappuccino', 3.50),
+(8, 'Americano', 2.75),
+(9, 'Espresso', 2.25),
+(10, 'Doppio', 3.00),
+(11, 'Cortado', 3.25),
+(12, 'Red Eye', 3.50),
+(13, 'Galão', 3.50),
+(14, 'Lungo', 3.00),
+(15, 'Macchiato', 3.25),
+(16, 'Mocha', 3.75),
+(17, 'Ristretto', 2.50),
+(18, 'Flat White', 3.50),
+(19, 'Affogato', 4.00),
+(20, 'Café au Lait', 3.50),
+(21, 'Iced Coffee', 3.00),
+(22, 'Frappuccino', 4.50);
 
-insert ignore into coffee_house values(10023, 'Mendocino', 3450, 2005, 5455);
-insert ignore into coffee_house values(33002, 'Seattle', 4699, 3109, 7808);
-insert ignore into coffee_house values(10040, 'SF', 5386, 2841, 8227);
-insert ignore into coffee_house values(32001, 'Portland', 3147, 3579, 6726);
-insert ignore into coffee_house values(10042, 'SF', 2863, 1874, 4710);
-insert ignore into coffee_house values(10024, 'Sacramento', 1987, 2341, 4328);
-insert ignore into coffee_house values(10039, 'Carmel', 2691, 1121, 3812);
-insert ignore into coffee_house values(10041, 'LA', 1533, 1007, 2540);
-insert ignore into coffee_house values(33005, 'Olympia', 2733, 1550, 4283);
-insert ignore into coffee_house values(33010, 'Seattle', 3210, 2177, 5387);
-insert ignore into coffee_house values(10035, 'SF', 1922, 1056, 2978);
-insert ignore into coffee_house values(10037, 'LA', 2143, 1876, 4019);
-insert ignore into coffee_house values(10034, 'San_Jose', 1234, 1032, 2266);
-insert ignore into coffee_house values(32004, 'Eugene', 1356, 1112, 2468);
+INSERT INTO coffee_drink (id, description) VALUES
+(5, 'just coffee'),
+(6, 'espresso, steamed milk'),
+(7, 'espresso, steamed milk, foam'),
+(8, 'espresso, hot water'),
+(9, '1oz espresso'),
+(10, '2oz espresso'),
+(11, '1oz espresso, 1oz steamed milk'),
+(12, 'coffee, espresso'),
+(13, 'espresso, foamed milk'),
+(14, 'long pulled espresso'),
+(15, 'espresso shot, foam'),
+(16, 'espresso, chocolate, steamed milk'),
+(17, 'short pulled espresso'),
+(18, 'espresso, steamed milk'),
+(19, 'espresso, ice cream'),
+(20, 'coffee, steamed milk'),
+(21, 'coffee, ice, cream/sugar'),
+(22, 'coffee/espresso, blended ice, whip');
+
+INSERT INTO product (id, name, price) VALUES
+(23, 'BrewSmith Deluxe', 89.99),
+(24, 'Morning Essence', 49.99),
+(25, 'CoffeeCraft Express', 29.99),
+(26, 'AeroGlow Press', 79.99),
+(27, 'PureBrew Master', 59.99),
+(28, 'SiphonVibe Pro', 99.99),
+(29, 'ChillBrew Cooler', 69.99),
+(30, 'Brewology Pro', 79.99);
+
+INSERT INTO coffee_maker (id, supplier_id, coffee_maker_type) VALUES
+(23, 5, 'French Press'),
+(24, 6, 'Percolator'),
+(25, 7, 'Single Serve'),
+(26, 8, 'Aeropress'),
+(27, 9, 'Drip'),
+(28, 10, 'Pour Over'),
+(29, 1, 'Cold Brew'),
+(30, 2, 'Moka');
+
+INSERT INTO inventory (product_id, stock_level) VALUES
+(1, 100), -- Arabica
+(2, 100), -- Robusta
+(3, 50),  -- Excelsa
+(4, 70),  -- Liberica
+(5, 200), -- Black Coffee
+(6, 200), -- Latte
+(7, 200), -- Cappuccino
+(8, 200), -- Americano
+(9, 200), -- Espresso
+(10, 200), -- Doppio
+(11, 200), -- Cortado
+(12, 200), -- Red Eye
+(13, 200), -- Galão
+(14, 200), -- Lungo
+(15, 200), -- Macchiato
+(16, 200), -- Mocha
+(17, 200), -- Ristretto
+(18, 200), -- Flat White
+(19, 200), -- Affogato
+(20, 200), -- Café au Lait
+(21, 200), -- Iced Coffee
+(22, 200), -- Frappuccino
+(23, 50),  -- French Press
+(24, 50),  -- Percolator
+(25, 30),  -- Single Serve Brewer
+(26, 40),  -- AeroPress
+(27, 40),  -- Drip Coffee Maker
+(28, 40),  -- Pour Over Set
+(29, 30),  -- Cold Brew Kit
+(30, 50);  -- Moka Pot
+
+INSERT INTO sales (product_id, quantity, sale_date, total_price) VALUES
+(1, 10, '2025-01-10 10:30:00', 159.90), -- Arabica
+(2, 5, '2025-01-12 14:00:00', 62.45), -- Robusta
+(5, 20, '2025-01-15 08:45:00', 50.00), -- Black Coffee
+(6, 15, '2025-01-15 09:00:00', 56.25), -- Latte
+(7, 10, '2025-01-15 09:15:00', 35.00), -- Cappuccino
+(25, 2, '2025-01-20 11:30:00', 151.98); -- Single Serve Brewer
+
+INSERT INTO coffee_house (name, inventory_id, sales_id) VALUES
+('CupOfCoffee', 1, 1);
