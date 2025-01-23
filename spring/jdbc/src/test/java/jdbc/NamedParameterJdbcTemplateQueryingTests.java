@@ -145,8 +145,8 @@ class NamedParameterJdbcTemplateQueryingTests {
         );
 
     assertNotNull(coffee);
-    assertEquals("Colombian", coffee.getName());
-    assertEquals(7.99f, coffee.getPrice());
+    assertEquals("Colombian", coffee.name());
+    assertEquals(7.99f, coffee.price());
   }
 
   @Test

@@ -60,8 +60,8 @@ public class JdbcClientUpdatingTests {
                        .single();
 
     assertNotNull(coffee);
-    assertEquals("Ethiopian", coffee.getName());
-    assertEquals(10.99f, coffee.getPrice());
+    assertEquals("Ethiopian", coffee.name());
+    assertEquals(10.99f, coffee.price());
   }
 
   // updating an existing entry
@@ -82,8 +82,8 @@ public class JdbcClientUpdatingTests {
                        .single();
 
     assertNotNull(coffee);
-    assertEquals("Colombian", coffee.getName());
-    assertEquals(8.99f, coffee.getPrice(), 0.01);
+    assertEquals("Colombian", coffee.name());
+    assertEquals(8.99f, coffee.price(), 0.01);
   }
 
   // deleting an existing entry

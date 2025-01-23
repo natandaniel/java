@@ -66,8 +66,8 @@ public class NamedParameterJdbcTemplateUpdatingTests {
                 new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0));
 
     assertNotNull(coffee);
-    assertEquals("Ethiopian", coffee.getName());
-    assertEquals(10.99f, coffee.getPrice());
+    assertEquals("Ethiopian", coffee.name());
+    assertEquals(10.99f, coffee.price());
   }
 
   // updating an existing entry
@@ -89,8 +89,8 @@ public class NamedParameterJdbcTemplateUpdatingTests {
                 new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0));
 
     assertNotNull(coffee);
-    assertEquals("Colombian", coffee.getName());
-    assertEquals(8.99f, coffee.getPrice());
+    assertEquals("Colombian", coffee.name());
+    assertEquals(8.99f, coffee.price());
   }
 
   // deleting an existing entry
@@ -132,8 +132,8 @@ public class NamedParameterJdbcTemplateUpdatingTests {
                 new Coffee(resultSet.getString("cof_name"), 49, resultSet.getFloat("price"), 0, 0));
 
     assertNotNull(coffee);
-    assertEquals("Coffee3", coffee.getName());
-    assertEquals(1.99f, coffee.getPrice());
+    assertEquals("Coffee3", coffee.name());
+    assertEquals(1.99f, coffee.price());
   }
 
 }

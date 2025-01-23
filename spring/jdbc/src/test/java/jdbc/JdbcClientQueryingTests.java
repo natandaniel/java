@@ -142,8 +142,8 @@ class JdbcClientQueryingTests {
                        .single();
 
     assertNotNull(coffee);
-    assertEquals("Colombian", coffee.getName());
-    assertEquals(7.99, coffee.getPrice(), 0.01);
+    assertEquals("Colombian", coffee.name());
+    assertEquals(7.99, coffee.price(), 0.01);
   }
 
   @Test

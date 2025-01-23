@@ -55,8 +55,8 @@ public class JdbcTemplateUpdatingTests {
             "Ethiopian");
 
     assertNotNull(coffee);
-    assertEquals("Ethiopian", coffee.getName());
-    assertEquals(10.99f, coffee.getPrice());
+    assertEquals("Ethiopian", coffee.name());
+    assertEquals(10.99f, coffee.price());
   }
 
   // updating an existing entry
@@ -74,8 +74,8 @@ public class JdbcTemplateUpdatingTests {
             "Colombian");
 
     assertNotNull(coffee);
-    assertEquals("Colombian", coffee.getName());
-    assertEquals(8.99f, coffee.getPrice());
+    assertEquals("Colombian", coffee.name());
+    assertEquals(8.99f, coffee.price());
   }
 
   // deleting an existing entry
@@ -105,9 +105,9 @@ public class JdbcTemplateUpdatingTests {
           @Override
           public void setValues(PreparedStatement ps, int i) throws SQLException {
             Coffee coffee = coffeeBatch.get(i);
-            ps.setString(1, coffee.getName());
+            ps.setString(1, coffee.name());
             ps.setInt(2, 49);
-            ps.setFloat(3, coffee.getPrice());
+            ps.setFloat(3, coffee.price());
             ps.setInt(4, 0);
             ps.setInt(5, 0);
           }
@@ -128,8 +128,8 @@ public class JdbcTemplateUpdatingTests {
             "Coffee3");
 
     assertNotNull(coffee);
-    assertEquals("Coffee3", coffee.getName());
-    assertEquals(1.99f, coffee.getPrice());
+    assertEquals("Coffee3", coffee.name());
+    assertEquals(1.99f, coffee.price());
   }
 
   @Test
@@ -142,11 +142,11 @@ public class JdbcTemplateUpdatingTests {
 
     List<Object[]> batch = new ArrayList<>();
     coffeeBatch.forEach(coffee -> batch.add(new Object[] {
-        coffee.getName(),
-        coffee.getSupId(),
-        coffee.getPrice(),
-        coffee.getSales(),
-        coffee.getTotal() }));
+        coffee.name(),
+        coffee.supId(),
+        coffee.price(),
+        coffee.sales(),
+        coffee.total() }));
 
     mysqlJdbcTemplate.batchUpdate(
         "insert into COFFEES (cof_name, sup_id, price, sales, total) values (?, ?, ?, ?, ?)",
@@ -162,8 +162,8 @@ public class JdbcTemplateUpdatingTests {
             "Coffee3");
 
     assertNotNull(coffee);
-    assertEquals("Coffee3", coffee.getName());
-    assertEquals(1.99f, coffee.getPrice());
+    assertEquals("Coffee3", coffee.name());
+    assertEquals(1.99f, coffee.price());
   }
 
   @Test
@@ -179,9 +179,9 @@ public class JdbcTemplateUpdatingTests {
         coffeeBatch,
         2,
         (PreparedStatement ps, Coffee coffee) -> {
-          ps.setString(1, coffee.getName());
+          ps.setString(1, coffee.name());
           ps.setInt(2, 49);
-          ps.setFloat(3, coffee.getPrice());
+          ps.setFloat(3, coffee.price());
           ps.setInt(4, 0);
           ps.setInt(5, 0);
         }
@@ -197,8 +197,8 @@ public class JdbcTemplateUpdatingTests {
             "Coffee3");
 
     assertNotNull(coffee);
-    assertEquals("Coffee3", coffee.getName());
-    assertEquals(1.99f, coffee.getPrice());
+    assertEquals("Coffee3", coffee.name());
+    assertEquals(1.99f, coffee.price());
   }
 
 }

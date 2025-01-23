@@ -17,11 +17,11 @@ public class JdbcCoffeeRepository {
 
   public void insert(Coffee coffee) {
     Map<String, Object> parameters = new HashMap<>();
-    parameters.put("cof_name", coffee.getName());
-    parameters.put("sup_id", coffee.getSupId());
-    parameters.put("price", coffee.getPrice());
-    parameters.put("sales", coffee.getSales());
-    parameters.put("total", coffee.getTotal());
+    parameters.put("cof_name", coffee.name());
+    parameters.put("sup_id", coffee.supId());
+    parameters.put("price", coffee.price());
+    parameters.put("sales", coffee.sales());
+    parameters.put("total", coffee.total());
     simpleJdbcInsert.execute(parameters);
   }
 

@@ -55,10 +55,10 @@ public class JdbcCoffeeRepositoryTest {
                        .single();
 
     assertNotNull(coffee);
-    assertEquals("Ethiopian", coffee.getName());
-    assertEquals(49, coffee.getSupId());
-    assertEquals(10.99f, coffee.getPrice());
-    assertEquals(0, coffee.getSales());
-    assertEquals(0, coffee.getTotal());
+    assertEquals("Ethiopian", coffee.name());
+    assertEquals(49, coffee.supId());
+    assertEquals(10.99f, coffee.price());
+    assertEquals(0, coffee.sales());
+    assertEquals(0, coffee.total());
   }
 }
