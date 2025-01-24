@@ -23,8 +23,13 @@ public class CoffeeBeansRepositoryTests {
                              .build();
 
     CoffeeBeans coffeeBeans = new CoffeeBeans((short) 0, product, CoffeeBeanType.ARABICA);
+
     CoffeeBeans savedCoffeeBeans = coffeeBeansRepository.save(coffeeBeans);
-    System.out.println("h");
+
+    CoffeeBeans found = coffeeBeansRepository.findById((short) 5).orElseThrow();
+
+    //List<CoffeeBeans> found = coffeeBeansRepository.findByCoffeeBeanType(CoffeeBeanType.ARABICA);
+
   }
 
 }

@@ -1,10 +1,12 @@
 package jdbc;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true) // required for JDBC mapping
+@With
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 class Product {
   private final String name;
@@ -13,22 +15,10 @@ class Product {
   // optional
   private String description;
   private Float weight;
-  private Short supplierId;
+  private AggregateReference<Supplier, Short> supplierId;
 
   static ProductBuilder builder(String name, float price) {
     return new ProductBuilder(name, price);
-  }
-
-  private void setDescription(String description) {
-    this.description = description;
-  }
-
-  private void setSupplierId(Short supplierId) {
-    this.supplierId = supplierId;
-  }
-
-  private void setWeight(Float weight) {
-    this.weight = weight;
   }
 
   @RequiredArgsConstructor
@@ -58,9 +48,9 @@ class Product {
 
     Product build() {
       Product product = new Product(name, price);
-      product.setDescription(description);
-      product.setWeight(weight);
-      product.setSupplierId(supplierId);
+      product.description = this.description;
+      product.weight = this.weight;
+      product.supplierId = AggregateReference.to(supplierId);
       return product;
     }
 
