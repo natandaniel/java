@@ -7,8 +7,9 @@ import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Getter
-class Inventory {
+class Sale {
   private final short productId;
-  private final int stockLevel;
-  private final LocalDateTime lastUpdated;
+  private final int quantity;
+  private final float totalPrice;
+  private final LocalDateTime saleDate;
 }

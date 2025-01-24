@@ -10,101 +10,53 @@ INSERT INTO supplier (name) VALUES
 ('World of Coffee Traders'),
 ('FreshBrew Co.');
 
-INSERT INTO product (id, name, price) VALUES 
-(1, 'Arabica Blend', 15.99),
-(2, 'Robusta Premium', 12.49),
-(3, 'Excelsa Light Roast', 14.99),
-(4, 'Liberica Specialty', 16.89);
+INSERT INTO coffee_beans (name, price, description, weight, supplier_id, coffee_bean_type) VALUES
+('Arabica Blend', 15.99, '', 500.0, 1, 'Arabica'),
+('Robusta Premium', 12.49, '', 500.0, 2, 'Robusta'),
+('Excelsa Light Roast', 14.99, '', 250.0, 3, 'Excelsa'),
+('Liberica Specialty', 16.89, '', 500.0, 4, 'Liberica');
 
-INSERT INTO coffee_beans (id, weight, coffee_bean_type, supplier_id) VALUES
-(1, 500, 'Arabica', 1),
-(2, 500, 'Robusta', 2),
-(3, 250, 'Excelsa', 3),
-(4, 500, 'Liberica', 4);
+INSERT INTO coffee_beans_inventory (product_id, stock_level) VALUES
+(1, 100),
+(2, 100),
+(3, 50),
+(4, 70);
 
-INSERT INTO product (id, name, price) VALUES
-(5, 'Black Coffee', 2.50),
-(6, 'Latte', 3.75),
-(7, 'Cappuccino', 3.50),
-(8, 'Americano', 2.75),
-(9, 'Espresso', 2.25),
-(10, 'Doppio', 3.00),
-(11, 'Cortado', 3.25),
-(12, 'Red Eye', 3.50),
-(13, 'Galão', 3.50),
-(14, 'Lungo', 3.00),
-(15, 'Macchiato', 3.25),
-(16, 'Mocha', 3.75),
-(17, 'Ristretto', 2.50),
-(18, 'Flat White', 3.50),
-(19, 'Affogato', 4.00),
-(20, 'Café au Lait', 3.50),
-(21, 'Iced Coffee', 3.00),
-(22, 'Frappuccino', 4.50);
+INSERT INTO coffee_drink (name, price, description, weight, supplier_id) VALUES
+('Black Coffee', 2.50, 'just coffee', NULL, NULL),
+('Latte', 3.75, 'espresso, steamed milk', NULL, NULL),
+('Cappuccino', 3.50, 'espresso, steamed milk, foam', NULL, NULL),
+('Americano', 2.75, 'espresso, hot water', NULL, NULL),
+('Espresso', 2.25, '1oz espresso', NULL, NULL),
+('Doppio', 3.00, '2oz espresso', NULL, NULL),
+('Cortado', 3.25, '1oz espresso, 1oz steamed milk', NULL, NULL),
+('Red Eye', 3.50, 'coffee, espresso', NULL, NULL),
+('Galão', 3.50, 'espresso, foamed milk', NULL, NULL),
+('Lungo', 3.00, 'long pulled espresso', NULL, NULL),
+('Macchiato', 3.25, 'espresso shot, foam', NULL, NULL),
+('Mocha', 3.75, 'espresso, chocolate, steamed milk', NULL, NULL),
+('Ristretto', 2.50, 'short pulled espresso', NULL, NULL),
+('Flat White', 3.50, 'espresso, steamed milk', NULL, NULL),
+('Affogato', 4.00, 'espresso, ice cream', NULL, NULL),
+('Café au Lait', 3.50, 'coffee, steamed milk', NULL, NULL),
+('Iced Coffee', 3.00, 'coffee, ice, cream/sugar', NULL, NULL),
+('Frappuccino', 4.50, 'coffee/espresso, blended ice, whip', NULL, NULL);
 
-INSERT INTO coffee_drink (id, description) VALUES
-(5, 'just coffee'),
-(6, 'espresso, steamed milk'),
-(7, 'espresso, steamed milk, foam'),
-(8, 'espresso, hot water'),
-(9, '1oz espresso'),
-(10, '2oz espresso'),
-(11, '1oz espresso, 1oz steamed milk'),
-(12, 'coffee, espresso'),
-(13, 'espresso, foamed milk'),
-(14, 'long pulled espresso'),
-(15, 'espresso shot, foam'),
-(16, 'espresso, chocolate, steamed milk'),
-(17, 'short pulled espresso'),
-(18, 'espresso, steamed milk'),
-(19, 'espresso, ice cream'),
-(20, 'coffee, steamed milk'),
-(21, 'coffee, ice, cream/sugar'),
-(22, 'coffee/espresso, blended ice, whip');
+INSERT INTO coffee_maker (id, name, price, description, weight, supplier_id, coffee_maker_type) VALUES
+('BrewSmith Deluxe', 89.99, NULL, NULL, 5, 'French Press'),
+('Morning Essence', 49.99, NULL, NULL, 6, 'Percolator'),
+('CoffeeCraft Express', 29.99, NULL, NULL, 7, 'Single Serve'),
+('AeroGlow Press', 79.99, NULL, NULL, 8, 'Aeropress'),
+('PureBrew Master', 59.99, NULL, NULL, 9, 'Drip'),
+('SiphonVibe Pro', 99.99, NULL, NULL, 10, 'Pour Over'),
+('ChillBrew Cooler', 69.99), NULL, NULL, 1, 'Cold Brew',
+('Brewology Pro', 79.99, NULL, NULL, 2, 'Moka');
 
-INSERT INTO product (id, name, price) VALUES
-(23, 'BrewSmith Deluxe', 89.99),
-(24, 'Morning Essence', 49.99),
-(25, 'CoffeeCraft Express', 29.99),
-(26, 'AeroGlow Press', 79.99),
-(27, 'PureBrew Master', 59.99),
-(28, 'SiphonVibe Pro', 99.99),
-(29, 'ChillBrew Cooler', 69.99),
-(30, 'Brewology Pro', 79.99);
-
-INSERT INTO coffee_maker (id, supplier_id, coffee_maker_type) VALUES
-(23, 5, 'French Press'),
-(24, 6, 'Percolator'),
-(25, 7, 'Single Serve'),
-(26, 8, 'Aeropress'),
-(27, 9, 'Drip'),
-(28, 10, 'Pour Over'),
-(29, 1, 'Cold Brew'),
-(30, 2, 'Moka');
-
-INSERT INTO inventory (product_id, stock_level) VALUES
-(1, 100), -- Arabica
-(2, 100), -- Robusta
-(3, 50),  -- Excelsa
-(4, 70),  -- Liberica
-(5, 200), -- Black Coffee
-(6, 200), -- Latte
-(7, 200), -- Cappuccino
-(8, 200), -- Americano
-(9, 200), -- Espresso
-(10, 200), -- Doppio
-(11, 200), -- Cortado
-(12, 200), -- Red Eye
-(13, 200), -- Galão
-(14, 200), -- Lungo
-(15, 200), -- Macchiato
-(16, 200), -- Mocha
-(17, 200), -- Ristretto
-(18, 200), -- Flat White
-(19, 200), -- Affogato
-(20, 200), -- Café au Lait
-(21, 200), -- Iced Coffee
-(22, 200), -- Frappuccino
+INSERT INTO coffee_maker_inventory (coffee_maker_id, stock_level) VALUES
+(1, 100),
+(2, 100),
+(3, 50),
+(4, 70),
 (23, 50),  -- French Press
 (24, 50),  -- Percolator
 (25, 30),  -- Single Serve Brewer
@@ -113,6 +65,9 @@ INSERT INTO inventory (product_id, stock_level) VALUES
 (28, 40),  -- Pour Over Set
 (29, 30),  -- Cold Brew Kit
 (30, 50);  -- Moka Pot
+
+
+
 
 INSERT INTO sales (product_id, quantity, sale_date, total_price) VALUES
 (1, 10, '2025-01-10 10:30:00', 159.90), -- Arabica

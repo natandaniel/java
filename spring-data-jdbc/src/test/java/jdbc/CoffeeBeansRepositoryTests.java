@@ -16,9 +16,15 @@ public class CoffeeBeansRepositoryTests {
   private CoffeeBeansRepository coffeeBeansRepository;
 
   @Test
-  void testCountOfCoffeeTable() {
-    System.out.println("hello");
-    //assertEquals(5, jdbcCoffeeRepository.count());
+  void testInsertingANewCoffeeBeansProduct() {
+    Product product = Product.builder("Mountain Roast", 10.99f)
+                             .setWeight(500.0f)
+                             .setSupplierId((short) 1)
+                             .build();
+
+    CoffeeBeans coffeeBeans = new CoffeeBeans((short) 0, product, CoffeeBeanType.ARABICA);
+    CoffeeBeans savedCoffeeBeans = coffeeBeansRepository.save(coffeeBeans);
+    System.out.println("h");
   }
 
 }

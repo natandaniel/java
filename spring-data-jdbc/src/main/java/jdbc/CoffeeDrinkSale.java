@@ -1,20 +1,17 @@
 package jdbc;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("coffee_drink")
+@RequiredArgsConstructor
 @Getter
-class CoffeeDrink {
+@Table("coffee_drink_sale")
+class CoffeeDrinkSale {
   @Id
   private final short id;
   @Embedded.Empty
-  private final Product product;
-
-  CoffeeDrink(short id, Product product) {
-    this.id = id;
-    this.product = product;
-  }
+  private final Sale sale;
 }

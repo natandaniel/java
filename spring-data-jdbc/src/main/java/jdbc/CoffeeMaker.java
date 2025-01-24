@@ -1,18 +1,22 @@
 package jdbc;
 
 import lombok.Getter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table("coffee_maker")
-class CoffeeMaker extends Product {
+@Getter
+class CoffeeMaker {
+  @Id
+  private final short id;
+  @Embedded.Empty
+  private final Product product;
   private final CoffeeMakerType coffeeMakerType;
-  @Getter
-  private final String supplierName;
 
-  CoffeeMaker(short id, String name, CoffeeMakerType coffeeMakerType, float price,
-      String supplierName) {
-    super(id, name, price);
+  CoffeeMaker(short id, Product product, CoffeeMakerType coffeeMakerType) {
+    this.id = id;
+    this.product = product;
     this.coffeeMakerType = coffeeMakerType;
-    this.supplierName = supplierName;
   }
 }

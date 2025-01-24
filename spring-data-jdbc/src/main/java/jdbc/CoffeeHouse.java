@@ -17,7 +17,7 @@ class CoffeeHouse {
   private final String state;
   private final String zip;
   private final Inventory inventory;
-  private final Sales sales;
+  private final Sale sale;
 
   int getTotalSales(Short productId) {
     return 0;//sales.getTotalSales(productId);
