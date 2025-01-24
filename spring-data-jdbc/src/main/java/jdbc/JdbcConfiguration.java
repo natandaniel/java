@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJdbcRepositories("jdbc")
-@PropertySource("classpath:jdbc/database.properties")
+@PropertySource("classpath:database.properties")
 public class JdbcConfiguration extends AbstractJdbcConfiguration {
   @Value("${mysql.host}")
   private String mysqlDatabaseHost;
