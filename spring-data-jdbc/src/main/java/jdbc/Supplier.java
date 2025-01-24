@@ -10,6 +10,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @Getter
 public class Supplier {
   @Id
-  private final short id;
+  private final int id;
   private final String name;
 }

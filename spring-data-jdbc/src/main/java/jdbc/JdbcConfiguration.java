@@ -13,6 +13,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.TransactionManager;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Configuration
 @EnableJdbcRepositories("jdbc")
@@ -45,6 +46,11 @@ public class JdbcConfiguration extends AbstractJdbcConfiguration {
     mysqlDataSource.setUser(mysqlDatabaseUser);
     mysqlDataSource.setPassword(mysqlDatabaseUserPassword);
     return mysqlDataSource;
+  }
+
+  @Override
+  protected List<?> userConverters() {
+    return List.of(new StringToCoffeeMakerTypeConverter());
   }
 
 }

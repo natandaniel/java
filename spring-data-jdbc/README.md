@@ -97,3 +97,18 @@ Loading aggregates:
 
 An alternative for querying and persisting is using the Spring bean *JdbcAggregateTemplate*.
 
+### Mapping
+
+*MappingJdbcConverter* provides mapping support.
+
+Mapping instructions are understood explicitly through annotations or implicitly through conventions.
+
+Conventions:
+<ul>
+<li>the int Java class name is mapped to the table name</li>
+<li>field names are mapped this way: myFieldName -> my_field_name</li>
+<li>table and column names derived this way are used without quotes in SQL statements</li>
+<li>register converters with CustomConversions to override the default mapping of object properties to row columns and values</li>
+</ul>
+
+By default, the name of the foreign key column is the table name of the referencing entity.

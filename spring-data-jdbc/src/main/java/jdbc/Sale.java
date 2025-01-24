@@ -1,15 +1,13 @@
 package jdbc;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
-@RequiredArgsConstructor
-@Getter
-class Sale {
-  private final short productId;
-  private final int quantity;
-  private final float totalPrice;
-  private final LocalDateTime saleDate;
+record Sale(
+    @Id int id,
+    String productName,
+    int quantity,
+    float totalPrice,
+    LocalDateTime saleDate) {
 }

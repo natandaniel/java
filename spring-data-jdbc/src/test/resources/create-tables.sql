@@ -1,84 +1,61 @@
-CREATE TABLE suppliers (
-    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE supplier (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255)
+);
+
+CREATE TABLE coffee_house (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    street  VARCHAR(255),
+    city  VARCHAR(50),
+    state  VARCHAR(50),
+    zip  VARCHAR(50),
+    supplier INTEGER,
+    FOREIGN KEY (supplier) REFERENCES supplier (id)
 );
 
 CREATE TABLE coffee_beans (
-    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     price FLOAT NOT NULL,
     description VARCHAR(255),
     weight FLOAT,
-    supplier_id SMALLINT,
     coffee_bean_type VARCHAR(255) NOT NULL,
-    FOREIGN KEY (supplier_id) REFERENCES suppliers (id)
-);
-
-CREATE TABLE coffee_beans_inventory (
-    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
-    product_id SMALLINT NOT NULL,
-    stock_level INT NOT NULL,
+    stock_level INTEGER,
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (product_id) REFERENCES coffee_beans (id)
+    coffee_house INTEGER,
+    FOREIGN KEY (coffee_house) REFERENCES coffee_house (id) -- by default, the name of the foreign key column is the table name of the referencing entity; configure a custom name with @MappedCollection(idColumn = "...")
 );
 
-CREATE TABLE coffee_beans_sales (
-    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
-    product_id SMALLINT NOT NULL,
-    quantity INT NOT NULL,
-    sale_date TIMESTAMP NOT NULL,
-    total_price FLOAT NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES coffee_beans (id)
-);
-
-CREATE TABLE coffee_drinks (
-    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE coffee_maker (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     price FLOAT NOT NULL,
     description VARCHAR(255),
     weight FLOAT,
-    supplier_id SMALLINT,
-    FOREIGN KEY (supplier_id) REFERENCES suppliers (id)
-);
-
-CREATE TABLE coffee_drink_sales (
-    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
-    product_id SMALLINT NOT NULL,
-    quantity INT NOT NULL,
-    sale_date TIMESTAMP NOT NULL,
-    total_price FLOAT NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES coffee_drinks (id)
-);
-
-CREATE TABLE coffee_makers (
-    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    price FLOAT NOT NULL,
-    description VARCHAR(255),
-    weight FLOAT,
-    supplier_id SMALLINT,
     coffee_maker_type VARCHAR(255) NOT NULL,
-    FOREIGN KEY (supplier_id) REFERENCES suppliers (id)
-);
-
-CREATE TABLE coffee_makers_inventory (
-    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
-    product_id SMALLINT NOT NULL,
-    stock_level INT NOT NULL,
+    stock_level INTEGER,
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (product_id) REFERENCES coffee_makers (id)
+    coffee_house INTEGER,
+    FOREIGN KEY (coffee_house) REFERENCES coffee_house (id)
 );
 
-CREATE TABLE coffee_maker_sales (
-    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
-    product_id SMALLINT NOT NULL,
+CREATE TABLE coffee_drink (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price FLOAT NOT NULL,
+    description VARCHAR(255),
+    weight FLOAT,
+    coffee_house INTEGER,
+    FOREIGN KEY (coffee_house) REFERENCES coffee_house (id)
+);
+
+CREATE TABLE sale (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(255) NOT NULL,
     quantity INT NOT NULL,
     sale_date TIMESTAMP NOT NULL,
     total_price FLOAT NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES coffee_makers (id)
-);
-
-CREATE TABLE coffee_houses (
-    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255)
+    coffee_house INTEGER,
+    FOREIGN KEY (coffee_house) REFERENCES coffee_house (id)
 );

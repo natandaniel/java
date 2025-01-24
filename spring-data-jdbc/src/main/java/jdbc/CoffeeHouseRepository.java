@@ -1,6 +1,9 @@
 package jdbc;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 
-public interface CoffeeHouseRepository extends CrudRepository<CoffeeHouse, Short> {
+interface CoffeeHouseRepository extends ListCrudRepository<CoffeeHouse, Integer> {
+
+  CoffeeHouse findByName(String name);
+
 }
