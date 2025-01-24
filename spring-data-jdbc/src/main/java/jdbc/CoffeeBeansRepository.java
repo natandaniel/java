@@ -1,6 +1,11 @@
 package jdbc;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 
-interface CoffeeBeansRepository extends CrudRepository<CoffeeBeans, Short> {
+import java.util.Optional;
+
+interface CoffeeBeansRepository extends ListCrudRepository<CoffeeBeans, Short> {
+
+  Optional<CoffeeBeans> findByName(String name);
+
 }

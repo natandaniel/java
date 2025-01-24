@@ -1,4 +1,4 @@
-INSERT INTO supplier (name) VALUES
+INSERT INTO suppliers (name) VALUES
 ('GreenLeaf Supplies'),
 ('Global Beans Inc.'),
 ('BrewMasters Ltd.'),
@@ -22,7 +22,13 @@ INSERT INTO coffee_beans_inventory (product_id, stock_level) VALUES
 (3, 50),
 (4, 70);
 
-INSERT INTO coffee_drink (name, price, description, weight, supplier_id) VALUES
+INSERT INTO coffee_beans_sales (product_id, quantity, sale_date, total_price) VALUES
+(1, 10, '2025-01-10 10:30:00', 159.90),
+(2, 5, '2025-01-12 14:00:00', 62.45),
+(3, 20, '2025-01-15 08:45:00', 299.8),
+(4, 15, '2025-01-15 09:00:00', 253.35);
+
+INSERT INTO coffee_drinks (name, price, description, weight, supplier_id) VALUES
 ('Black Coffee', 2.50, 'just coffee', NULL, NULL),
 ('Latte', 3.75, 'espresso, steamed milk', NULL, NULL),
 ('Cappuccino', 3.50, 'espresso, steamed milk, foam', NULL, NULL),
@@ -42,40 +48,41 @@ INSERT INTO coffee_drink (name, price, description, weight, supplier_id) VALUES
 ('Iced Coffee', 3.00, 'coffee, ice, cream/sugar', NULL, NULL),
 ('Frappuccino', 4.50, 'coffee/espresso, blended ice, whip', NULL, NULL);
 
-INSERT INTO coffee_maker (id, name, price, description, weight, supplier_id, coffee_maker_type) VALUES
+INSERT INTO coffee_drink_sales (product_id, quantity, sale_date, total_price) VALUES
+(1, 10, '2025-01-10 10:30:00', 25.0),
+(2, 10, '2025-01-12 14:00:00', 37.5),
+(5, 10, '2025-01-15 08:45:00', 22.5),
+(6, 10, '2025-01-15 09:00:00', 30.00),
+(7, 10, '2025-01-15 09:15:00', 32.5),
+(18, 10, '2025-01-20 11:30:00', 45.0);
+
+INSERT INTO coffee_makers (name, price, description, weight, supplier_id, coffee_maker_type) VALUES
 ('BrewSmith Deluxe', 89.99, NULL, NULL, 5, 'French Press'),
 ('Morning Essence', 49.99, NULL, NULL, 6, 'Percolator'),
 ('CoffeeCraft Express', 29.99, NULL, NULL, 7, 'Single Serve'),
 ('AeroGlow Press', 79.99, NULL, NULL, 8, 'Aeropress'),
 ('PureBrew Master', 59.99, NULL, NULL, 9, 'Drip'),
 ('SiphonVibe Pro', 99.99, NULL, NULL, 10, 'Pour Over'),
-('ChillBrew Cooler', 69.99), NULL, NULL, 1, 'Cold Brew',
+('ChillBrew Cooler', 69.99, NULL, NULL, 1, 'Cold Brew'),
 ('Brewology Pro', 79.99, NULL, NULL, 2, 'Moka');
 
-INSERT INTO coffee_maker_inventory (coffee_maker_id, stock_level) VALUES
+INSERT INTO coffee_maker_sales (product_id, quantity, sale_date, total_price) VALUES
+(1, 10, '2025-01-10 10:30:00', 890.99),
+(2, 5, '2025-01-12 14:00:00', 249.95),
+(5, 20, '2025-01-15 08:45:00', 1199.8),
+(6, 15, '2025-01-15 09:00:00', 1499.85),
+(7, 10, '2025-01-15 09:15:00', 690.99),
+(8, 2, '2025-01-20 11:30:00', 159.98);
+
+INSERT INTO coffee_makers_inventory (product_id, stock_level) VALUES
 (1, 100),
 (2, 100),
 (3, 50),
 (4, 70),
-(23, 50),  -- French Press
-(24, 50),  -- Percolator
-(25, 30),  -- Single Serve Brewer
-(26, 40),  -- AeroPress
-(27, 40),  -- Drip Coffee Maker
-(28, 40),  -- Pour Over Set
-(29, 30),  -- Cold Brew Kit
-(30, 50);  -- Moka Pot
+(5, 50),
+(6, 30),
+(7, 40),
+(8, 40);
 
-
-
-
-INSERT INTO sales (product_id, quantity, sale_date, total_price) VALUES
-(1, 10, '2025-01-10 10:30:00', 159.90), -- Arabica
-(2, 5, '2025-01-12 14:00:00', 62.45), -- Robusta
-(5, 20, '2025-01-15 08:45:00', 50.00), -- Black Coffee
-(6, 15, '2025-01-15 09:00:00', 56.25), -- Latte
-(7, 10, '2025-01-15 09:15:00', 35.00), -- Cappuccino
-(25, 2, '2025-01-20 11:30:00', 151.98); -- Single Serve Brewer
-
-INSERT INTO coffee_house (name, inventory_id, sales_id) VALUES
-('CupOfCoffee', 1, 1);
+INSERT INTO coffee_houses (name) VALUES
+('CupOfCoffee');

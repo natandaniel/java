@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("supplier")
+@Table("suppliers")
 @AllArgsConstructor
 @Getter
 public class Supplier {

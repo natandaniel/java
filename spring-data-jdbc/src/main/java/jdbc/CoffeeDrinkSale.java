@@ -8,7 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @RequiredArgsConstructor
 @Getter
-@Table("coffee_drink_sale")
+@Table("coffee_drink_sales")
 class CoffeeDrinkSale {
   @Id
   private final short id;

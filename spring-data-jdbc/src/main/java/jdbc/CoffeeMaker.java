@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("coffee_maker")
+@Table("coffee_makers")
 @Getter
 class CoffeeMaker {
   @Id

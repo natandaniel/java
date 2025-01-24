@@ -71,5 +71,29 @@ configured, other beans are automatically included.
 
 ### Persisting entities
 
+Create or update an entity with *CrudRepository.save(…)*.
 
+Set *@Id* annotation on the identifier of an entity.
+
+Some downsides:
+<ul>
+<li>if the aggregate root is not new, all referenced entities get deleted, the aggregate root gets updated, and all referenced entities get inserted again</li>
+</ul>
+
+Loading aggregates:
+<ol>
+<li>Traditional way: each query loads the aggregate roots, referenced entities are loaded separately</li>
+<li>Since Spring Data JDBC 3.2: *Single Query Loading* (experimental), an arbitrary number of aggregates can be fully loaded with a single SQL query; this approach has requirements:
+<ul>
+<li>the aggregate must not have nested collections, including *Map*</li>
+<li>the aggregate must not use AggregateReference or embedded entities</li>
+<li>the database dialect must support it; H2 and HSQL don't support this</li>
+<li>works only for find methods in CrudRepository, not for derived queries and annotated queries</li>
+<li>needs to be enabled in JdbcMappingContext, by calling setSingleQueryLoadingEnabled(true)</li>
+</ul>
+</li>
+</ol>
+
+
+An alternative for querying and persisting is using the Spring bean *JdbcAggregateTemplate*.
 
