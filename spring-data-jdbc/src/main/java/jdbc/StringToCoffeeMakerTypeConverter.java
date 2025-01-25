@@ -8,6 +8,6 @@ class StringToCoffeeMakerTypeConverter implements Converter<String, CoffeeMakerT
 
   @Override
   public CoffeeMakerType convert(String source) {
-    return CoffeeMakerType.AEROPRESS;
+    return CoffeeMakerType.of(source);
   }
 }

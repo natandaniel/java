@@ -16,12 +16,14 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.List;
 
 @Configuration
 @EnableJdbcRepositories("jdbc")
+@EnableTransactionManagement
 @PropertySource("classpath:database.properties")
 class JdbcConfiguration extends AbstractJdbcConfiguration {
   @Value("${mysql.host}")
