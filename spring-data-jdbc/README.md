@@ -29,8 +29,7 @@ Spring Data JDBC provides a more simple framework with some limitations.
 
 For Spring Data in general, there is one *Repository* per aggregate root.
 
-For Spring Data JDBC, all entities reachable from an aggregate root are considered to be part of that aggregate root.
-It is assumed that only the aggregate root has a foreign key to a table storing non-root entities of the aggregate. No
+For Spring Data JDBC, all entities reachable from an aggregate root are considered to be part of that aggregate root. No
 other entity points toward non-root entities.
 
 ### Getting started
@@ -83,9 +82,9 @@ Some downsides:
 Loading aggregates:
 <ol>
 <li>Traditional way: each query loads the aggregate roots, referenced entities are loaded separately</li>
-<li>Since Spring Data JDBC 3.2: *Single Query Loading* (experimental), an arbitrary number of aggregates can be fully loaded with a single SQL query; this approach has requirements:
+<li>Since Spring Data JDBC 3.2: Single Query Loading (experimental), an arbitrary number of aggregates can be fully loaded with a single SQL query; this approach has requirements:
 <ul>
-<li>the aggregate must not have nested collections, including *Map*</li>
+<li>the aggregate must not have nested collections, including Map</li>
 <li>the aggregate must not use AggregateReference or embedded entities</li>
 <li>the database dialect must support it; H2 and HSQL don't support this</li>
 <li>works only for find methods in CrudRepository, not for derived queries and annotated queries</li>
@@ -105,8 +104,8 @@ Mapping instructions are understood explicitly through annotations or implicitly
 
 Conventions:
 <ul>
-<li>the int Java class name is mapped to the table name</li>
-<li>field names are mapped this way: myFieldName -> my_field_name</li>
+<li>the simple Java class name is mapped to the table name</li>
+<li>field names are mapped to column names this way: myFieldName -> my_field_name</li>
 <li>table and column names derived this way are used without quotes in SQL statements</li>
 <li>register converters with CustomConversions to override the default mapping of object properties to row columns and values</li>
 </ul>
