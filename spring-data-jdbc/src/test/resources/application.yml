@@ -1,5 +1,0 @@
-logging:
-  level:
-    org.springframework.data.jdbc.repository.query: DEBUG
-    org.springframework.jdbc.core: DEBUG
-    org.springframework.data.mapping: DEBUG
