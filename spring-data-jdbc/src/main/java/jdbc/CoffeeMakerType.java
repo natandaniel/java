@@ -8,5 +8,9 @@ enum CoffeeMakerType {
   DRIP,
   POUR_OVER,
   COLD_BREW,
-  MOKA
+  MOKA;
+
+  static CoffeeMakerType of(String text) {
+    return CoffeeMakerType.valueOf(text.toUpperCase().trim().replace(" ", "_"));
+  }
 }
