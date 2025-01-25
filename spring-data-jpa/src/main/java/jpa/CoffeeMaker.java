@@ -2,17 +2,13 @@ package jpa;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.With;
 import org.springframework.data.relational.core.mapping.Embedded;
 
 import java.time.LocalDateTime;
 
 @Table(name = "coffee_maker")
 @Entity
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
-@With(AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 class CoffeeMaker {
   @Id

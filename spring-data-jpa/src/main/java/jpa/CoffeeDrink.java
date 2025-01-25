@@ -1,15 +1,15 @@
 package jpa;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.relational.core.mapping.Embedded;
 
 @Table(name = "coffee_drink")
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
-@With(AccessLevel.PRIVATE)
 class CoffeeDrink {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,7 +1,10 @@
 package jpa;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +13,6 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
-@With(AccessLevel.PRIVATE)
 class Sale {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,10 +1,8 @@
 package jpa;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.With;
+import lombok.NoArgsConstructor;
 import org.springframework.data.relational.core.mapping.Embedded;
 
 import java.time.LocalDateTime;
@@ -12,31 +10,27 @@ import java.util.*;
 
 @Table(name = "coffee_house")
 @Entity
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(force = true)
 class CoffeeHouse {
   // managed entities
   @OneToMany(mappedBy = "coffeeHouse", cascade = CascadeType.ALL, orphanRemoval = true, fetch =
       FetchType.EAGER)
   @MapKeyColumn(name = "name")
-  @With(AccessLevel.PRIVATE)
   private final Map<String, CoffeeBeans> managedCoffeeBeans;
 
   @OneToMany(mappedBy = "coffeeHouse", cascade = CascadeType.ALL, orphanRemoval = true, fetch =
       FetchType.EAGER)
   @MapKeyColumn(name = "name")
-  @With(AccessLevel.PRIVATE)
   private final Map<String, CoffeeMaker> managedCoffeeMakers;
 
   @OneToMany(mappedBy = "coffeeHouse", cascade = CascadeType.ALL, orphanRemoval = true, fetch =
       FetchType.EAGER)
   @MapKeyColumn(name = "name")
-  @With(AccessLevel.PRIVATE)
   private final Map<String, CoffeeDrink> managedCoffeeDrinks;
 
   @OneToMany(mappedBy = "coffeeHouse", cascade = CascadeType.ALL, orphanRemoval = true, fetch =
       FetchType.EAGER)
   @MapKeyColumn(name = "name")
-  @With(AccessLevel.PRIVATE)
   private final List<Sale> sales;
 
   // coffee house details
@@ -45,11 +39,9 @@ class CoffeeHouse {
   @Getter
   private final Integer id;
 
-  @With
   @Getter
   private final String name;
 
-  @With
   @Getter
   @Embedded.Empty
   private final Address address;
@@ -67,19 +59,6 @@ class CoffeeHouse {
     managedCoffeeMakers = new HashMap<>();
     managedCoffeeDrinks = new HashMap<>();
     sales = new ArrayList<>();
-  }
-
-  private CoffeeHouse() {
-    id = null;
-    name = "";
-    address = null;
-
-    managedCoffeeBeans = new HashMap<>();
-    managedCoffeeMakers = new HashMap<>();
-    managedCoffeeDrinks = new HashMap<>();
-    sales = new ArrayList<>();
-
-    supplier = 1;
   }
 
   public Optional<CoffeeBeans> getCoffeeBeans(String name) {
