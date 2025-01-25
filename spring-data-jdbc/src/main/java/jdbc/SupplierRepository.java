@@ -1,6 +1,6 @@
 package jdbc;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 
-interface SupplierRepository extends CrudRepository<Supplier, Integer> {
+interface SupplierRepository extends ListCrudRepository<Supplier, Integer> {
 }
