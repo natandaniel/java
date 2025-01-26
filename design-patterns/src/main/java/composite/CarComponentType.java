@@ -1,4 +1,4 @@
-package composite.car;
+package composite;
 
 public enum CarComponentType {
   CAR,
