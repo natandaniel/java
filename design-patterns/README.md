@@ -85,6 +85,21 @@ Participants:
 <li>Client: asks a prototype to clone itself</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 </ul>
 
+### Singleton
+
+Ensure a class only has one instance, and provide a global point of access to it.
+
+To be used when:
+<ul>
+<li>there must be exactly one instance of a class, and it must be accessible to clients from a well-known access point</li>
+<li>the sole instance should be extensible by subclassing, and clients should be able to use and extended instance without modifying their code</li>
+</ul>
+
+Participants:
+<ul>
+<li>Singleton</li> 
+</ul>
+
 ## Structural
 
 ## Beahvioral
