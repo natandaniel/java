@@ -1,8 +1,5 @@
-package prototype;
+package creational.prototype;
 
-import abstractfactory.BmwCarFactory;
-import abstractfactory.CarFactory;
-import abstractfactory.MercedesCarFactory;
 import common.CarOwner;
 import common.MichelinWheel;
 import common.bmw.BmwChassis;
@@ -11,6 +8,9 @@ import common.bmw.BmwEngine;
 import common.mercedes.MercedesChassis;
 import common.mercedes.MercedesDoor;
 import common.mercedes.MercedesEngine;
+import creational.abstractfactory.BmwCarFactory;
+import creational.abstractfactory.CarFactory;
+import creational.abstractfactory.MercedesCarFactory;
 
 public class Client {
   public static void main(String[] args) {

@@ -1,14 +1,14 @@
-package abstractfactory;
+package creational.abstractfactory;
 
 import common.*;
-import common.mercedes.MercedesChassis;
-import common.mercedes.MercedesDoor;
-import common.mercedes.MercedesEngine;
+import common.bmw.BmwChassis;
+import common.bmw.BmwDoor;
+import common.bmw.BmwEngine;
 
-public class MercedesCarFactory implements CarFactory {
-  private static final MercedesCarFactory INSTANCE = new MercedesCarFactory();
+public class BmwCarFactory implements CarFactory {
+  private static final BmwCarFactory INSTANCE = new BmwCarFactory();
 
-  private MercedesCarFactory() {
+  private BmwCarFactory() {
   }
 
   public static CarFactory getInstance() {
@@ -18,7 +18,7 @@ public class MercedesCarFactory implements CarFactory {
   @Override
   public Car createCar() {
     return new CarImpl(
-        CarBrand.MERCEDES,
+        CarBrand.BMW,
         createEngine(),
         createChassis(),
         new Wheel[] {
@@ -35,7 +35,7 @@ public class MercedesCarFactory implements CarFactory {
 
   @Override
   public Engine createEngine() {
-    return new MercedesEngine();
+    return new BmwEngine();
   }
 
   @Override
@@ -45,11 +45,11 @@ public class MercedesCarFactory implements CarFactory {
 
   @Override
   public Chassis createChassis() {
-    return new MercedesChassis();
+    return new BmwChassis();
   }
 
   @Override
   public Door createDoor() {
-    return new MercedesDoor();
+    return new BmwDoor();
   }
 }

@@ -1,11 +1,11 @@
-package builder;
+package creational.builder;
 
 import common.*;
-import common.bmw.BmwChassis;
-import common.bmw.BmwDoor;
-import common.bmw.BmwEngine;
+import common.mercedes.MercedesChassis;
+import common.mercedes.MercedesDoor;
+import common.mercedes.MercedesEngine;
 
-public class BmwCarBuilder implements CarBuilder {
+public class MercedesCarBuilder implements CarBuilder {
   private final Wheel[] wheels = new Wheel[4];
   private final Door[] doors = new Door[4];
   private Engine engine;
@@ -13,7 +13,7 @@ public class BmwCarBuilder implements CarBuilder {
 
   @Override
   public CarBuilder buildEngine() {
-    this.engine = new BmwEngine();
+    this.engine = new MercedesEngine();
     return this;
   }
 
@@ -27,20 +27,20 @@ public class BmwCarBuilder implements CarBuilder {
 
   @Override
   public CarBuilder buildChassis() {
-    this.chassis = new BmwChassis();
+    this.chassis = new MercedesChassis();
     return this;
   }
 
   @Override
   public CarBuilder buildDoors() {
     for (int i = 0; i < 4; i++) {
-      this.doors[i] = new BmwDoor();
+      this.doors[i] = new MercedesDoor();
     }
     return this;
   }
 
   @Override
   public Car build() {
-    return new CarImpl(CarBrand.BMW, engine, chassis, wheels, doors);
+    return new CarImpl(CarBrand.MERCEDES, engine, chassis, wheels, doors);
   }
 }

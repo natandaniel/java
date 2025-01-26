@@ -1,7 +1,7 @@
-package prototype;
+package creational.prototype;
 
-import abstractfactory.CarFactory;
 import common.*;
+import creational.abstractfactory.CarFactory;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

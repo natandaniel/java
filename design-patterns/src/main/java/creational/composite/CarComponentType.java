@@ -1,4 +1,4 @@
-package composite;
+package creational.composite;
 
 public enum CarComponentType {
   CAR,
