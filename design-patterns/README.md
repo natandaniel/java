@@ -34,9 +34,21 @@ Participants:
 <li>Client</li>
 </ul>
 
-### Factory Method
-
 ### Builder
+
+Separate the construction of a complex object from its representation so that the same construction process can create
+different representations.
+
+Participants:
+<ul>
+<li>Builder: specifies the construction process of a Product</li>
+<li>ConcreteBuilder: implements Builder</li>
+<li>Product</li>
+<li>Director: uses the Builder to create a Product</li>
+<li>Client: configures the Director with a Builder</li>
+</ul>
+
+### Factory Method
 
 ### Prototype
 
