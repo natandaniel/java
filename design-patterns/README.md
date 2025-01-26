@@ -115,10 +115,28 @@ Participants:
 <li>Client: collaborates with objects conforming to the Target interface</li>
 </ul>
 
-## Beahvioral
+### Bridge
 
-## Design pattern goals
+Decouple an abstraction from its implementation so that the two can vary independently.
+
+Participants:
+<ul>
+<li>Abstraction: an interface, owns an Implementor to which it forwards client requests</li> 
+<li>RefinedAbstraction: an extension of Abstraction</li>
+<li>Implementor: an interface for implementation classes, can be different from Abstraction's interface</li>
+<li>ConcreteImplementor: implements Implementor</li>
+</ul>
 
 <ul>
-<li>system flexibility</li>
+<li>+ decouples interface and implementation</li>
+<li>+ improved extensibility</li>
+<li>+ hiding implementation details from clients</li>
 </ul>
+
+### Composite
+
+Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients trat individual objects
+and compositions of objects uniformly.
+
+## Behavioral
+
