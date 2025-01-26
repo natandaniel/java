@@ -1,3 +1,3 @@
-package abstractfactory;
+package common;
 
 public interface Door {}

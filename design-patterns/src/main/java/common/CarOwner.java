@@ -1,12 +1,12 @@
-package abstractfactory;
+package common;
 
 public class CarOwner {
   private final String name;
   private final Car car;
 
-  public CarOwner(String name, CarFactory carFactory) {
+  public CarOwner(String name, Car car) {
     this.name = name;
-    this.car = carFactory.createCar();
+    this.car = car;
   }
 
   public String toString() {

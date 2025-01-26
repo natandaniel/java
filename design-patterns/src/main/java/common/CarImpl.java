@@ -1,4 +1,4 @@
-package abstractfactory;
+package common;
 
 import lombok.Getter;
 

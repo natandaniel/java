@@ -1,5 +1,10 @@
 package abstractfactory;
 
+import common.*;
+import common.bmw.BmwChassis;
+import common.bmw.BmwDoor;
+import common.bmw.BmwEngine;
+
 public class BmwCarFactory implements CarFactory {
   private static final BmwCarFactory INSTANCE = new BmwCarFactory();
 

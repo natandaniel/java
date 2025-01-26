@@ -1,5 +1,10 @@
 package abstractfactory;
 
+import common.*;
+import common.mercedes.MercedesChassis;
+import common.mercedes.MercedesDoor;
+import common.mercedes.MercedesEngine;
+
 public class MercedesCarFactory implements CarFactory {
   private static final MercedesCarFactory INSTANCE = new MercedesCarFactory();
 

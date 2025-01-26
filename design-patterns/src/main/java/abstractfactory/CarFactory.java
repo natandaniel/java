@@ -1,5 +1,7 @@
 package abstractfactory;
 
+import common.*;
+
 public interface CarFactory {
   Car createCar();
 

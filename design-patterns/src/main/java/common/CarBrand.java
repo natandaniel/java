@@ -1,4 +1,4 @@
-package abstractfactory;
+package common;
 
 public enum CarBrand {
   BMW,
