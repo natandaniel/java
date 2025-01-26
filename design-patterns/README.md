@@ -102,6 +102,19 @@ Participants:
 
 ## Structural
 
+### Adapter
+
+Convert the interface of a class into another interface clients expect. Adapter lets classes work together that couldn't
+otherwise because of incompatible interfaces. Also known as wrapper. Enables existing code reuse.
+
+Participants:
+<ul>
+<li>Target: the target interface</li> 
+<li>Adaptee: the class to adapt</li>
+<li>Adapter: adapts the interface of Adaptee to that of Target</li>
+<li>Client: collaborates with objects conforming to the Target interface</li>
+</ul>
+
 ## Beahvioral
 
 ## Design pattern goals
