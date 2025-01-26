@@ -1,3 +1,6 @@
 package common;
 
-public interface Door {}
+public interface Door {
+
+  Door clone();
+}

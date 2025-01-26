@@ -50,7 +50,40 @@ Participants:
 
 ### Factory Method
 
+Define an interface for creating an object, but let subclasses decide which class to instantiate.
+
+To be used:
+<ul>
+<li>when a class can't anticipate the class of objects it must create</li>
+<li>when a class wants its subclasses to specify the objects it creates</li>
+<li>when classes delegate responsibility to one of several helper classesn and you want to localize rhe knowledge of which helper subclass is the delegate</li>
+</ul>
+
+Participants:
+<ul>
+<li>Product</li>
+<li>ConcreteProduct</li>
+<li>Creator</li>
+<li>ConcreteCreator</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+</ul>
+
 ### Prototype
+
+Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.
+
+To be used when object creation independency is required and:
+<ul>
+<li>when the classes to instantiate are specified at run-time or </li>
+<li>to avoid building a class hierarchy of factories that parallels the class hierarchy of products or</li>
+<li>when instances of a class can have one of only a few different combinations of state</li>
+</ul>
+
+Participants:
+<ul>
+<li>Prototype: declares an interface for cloning itself</li>
+<li>ConcretePrototype</li>
+<li>Client: asks a prototype to clone itself</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+</ul>
 
 ## Structural
 

@@ -24,4 +24,22 @@ public class CarImpl implements Car {
     }
   }
 
+  private CarImpl(CarImpl otherCar) {
+    this.brand = otherCar.brand;
+    this.engine = otherCar.engine.clone();
+    this.chassis = otherCar.chassis.clone();
+
+    for (int i = 0; i < wheels.length; i++) {
+      this.wheels[i] = otherCar.wheels[i].clone();
+    }
+
+    for (int i = 0; i < doors.length; i++) {
+      this.doors[i] = otherCar.doors[i].clone();
+    }
+  }
+
+  @Override
+  public Car clone() {
+    return new CarImpl(this);
+  }
 }
