@@ -138,5 +138,35 @@ Participants:
 Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients trat individual objects
 and compositions of objects uniformly.
 
+### Decorator
+
+Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing
+for extending functionality. Open/Close principle.
+
+Participants:
+<ul>
+<li>Component: defines the interface for objects that can have responsibilities added to them dynamically</li> 
+<li>ConcreteComponent</li>
+<li>Decorator: maintains a reference to a Component; defines an interface that conforms to Component</li>
+<li>ConcreteDecorator: adds responsibilities to the component</li>
+</ul>
+
+### Facade
+
+Provide a unified interface to a set of interfaces in a subsystem. Facade defines a higher-level interface that makes
+the subsystem easier to use.
+
+Participants:
+<ul>
+<li>Facade: knows which subsystem classes are responsible for a request; delegates client request to appropriate subsystem objects</li> 
+<li>Subsystem classes: implement subsystem functionality; handle work assigned by the facade object, have no knowledge of the facade</li>
+</ul>
+
+### Flyweight
+
+### Proxy
+
+Provide a surrogate or placeholder for another object to control access to it.
+
 ## Behavioral
 
