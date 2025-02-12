@@ -24,6 +24,7 @@
         <module>../spring-data-jpa</module>
         <module>../spring-data-mongodb</module>
         <module>../spring-data-cassandra</module>
+        <module>../language-basics</module>
     </modules>
 
     <dependencyManagement>
