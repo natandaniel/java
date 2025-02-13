@@ -3,12 +3,11 @@ package primitives;
 import java.util.Arrays;
 
 /**
- * <p>The primitive data type category is one of the two categories of data types.</p>
- * <p>Primitive data types or simply primitives are predefined by the language and named using
- * reserved keywords.</p>
+ * <p>Primitives are one of the two data types with references.</p>
+ * <p>Primitives are predefined by the language and named using reserved keywords.</p>
  * <p>Their values can be stored in variables and be directly represented by literals.</p>
  * <p>Primitive values don't share state with other primitive values.</p>
- * <p>Primitives are of the following types:
+ * <p>Primitives are of the following subtypes:
  * <ul>
  *     <li>boolean type: has exactly two values, true and false</li>
  *     <li>integral types: byte, short, int, and long, whose values are 8-bit, 16-bit, 32-bit and
