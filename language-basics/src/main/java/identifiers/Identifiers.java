@@ -2,8 +2,9 @@ package identifiers;
 
 /**
  * <p>Identifiers are names given to variables, parameters, methods, fields, classes, interfaces,
- * enums, records, annotations and packages.</p> <p>An identifier must follow the following regular
- * expression: <code>[a-zA-Z$_]([a-zA-Z$_0-9]|unicode)*</code>:
+ * enums, records, annotations and packages.</p>
+ * <p>An identifier must follow the following regular
+ * expression: <code>[a-zA-Z$_]([a-zA-Z$_0-9]|unicode)</code>:
  * <ol>
  *   <li>the first character must be a roman alphabet letter, a dollar sign or an underscore</li>
  *   <li>the subsequent letters can be any number of roman alphabet letters, digits, dollar
