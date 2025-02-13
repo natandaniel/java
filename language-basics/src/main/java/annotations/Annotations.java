@@ -4,11 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>Annotations are instructions for the compiler, that start with the at sign @ followed by a
- * key-word.</p> <p>Annotations can be placed before class, field or method declarations.</p>
- * <p>Annotations can be parameterized.</p> <p>Pre-defined annotations can be used to suppress
- * warnings at compile-time or tag a method as a redefinition of an inherited method amongst other
- * uses.</p><p>Custom annotations can also be created.</p>
+ * <p>
+ * Annotations are instructions for the compiler, that start with the at sign @ followed by a
+ * key-word.
+ * </p>
+ * <p>
+ * Annotations can be placed before class, field or method declarations.
+ * </p>
+ * <p>
+ * Annotations can be parameterized.
+ * </p>
+ * <p>
+ * Pre-defined annotations can be used to suppress warnings at compile-time or tag a method as a
+ * redefinition of an inherited method amongst other uses.
+ * </p>
+ * <p>
+ * Custom annotations can also be created.
+ * </p>
  */
 class Annotations {
 
