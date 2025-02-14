@@ -8,7 +8,7 @@ import java.util.Arrays;
  * <p>Their values can be stored in variables and be directly represented by literals.</p>
  * <p>Primitive values don't share state with other primitive values.</p>
  * <p>Primitives are of the following subtypes:
- * <ul>
+ *  <ul>
  *     <li>boolean type: has exactly two values, true and false</li>
  *     <li>integral types: byte, short, int, and long, whose values are 8-bit, 16-bit, 32-bit and
  *     64-bit signed two's-complement integers, respectively, and char, whose values are 16-bit
@@ -16,10 +16,50 @@ import java.util.Arrays;
  *     <li>floating point types: float, whose values exactly correspond to the 32-bit IEEE 754
  *     binary32 floating-point numbers, and double, whose values exactly correspond to the 64-bit
  *     IEEE 754 binary64 floating-point numbers</li>
- *   </ul>
+ *  </ul>
  * </p>
+ *
+ *
+ * - syntaxe déclaration de variable: type identifier;
+ * - syntaxe déclaration et affectation: type identifier = valeur;
+ * - rejet par le compilateur si la valeur ne correspond pas au type déclarée -> type safety de Java
+ * - factorisation possible: int i1, i2;
+ * - int a=2, b, c=4, d; // a et c initialisés, b et d déclarés seulement
+ * - portée/scope: bloc de code dans lequel la variable est déclarée { ... }
+ * - 1 variable ne peut avoir le meme nom qu'une autre dont la portée englobe la portée de la 1ere
+ * variable
+ * - variable au niveau d'une classe = attribut; sa portée est la classe + eventuellemnt en
+ * dehors de la classe;
+ * - valeurs initiales des attributs si non affectés: type primitif numerique 0, avec type char
+ * initialisé au symbole du chiffre 0, type boolean false; type référence null;
+ * - variable qui n'est pas un attribut = variable locale
+ * - var locales, pas de val par défaut, à obligatoirement initialiser sinon compile-time error
+ * - pas de variables globales
+ * - une variable public static = pseudo variable globale
+ * - paramètres de methode = variables locales à la methode; possible de les re-assigner
+ * - valeurs possibles d'affectation d'une variable: 1 literal, 2 autre var de meme type, 3
+ * expression qui donne le type attendu, 4 appel de fonction qui renvoie le type attendu
+ * - variable static -> attribut statique: allocation dynamique sur le tas (heap) au niveau de
+ * l'espace unique allouée à la classe correspondante
+ * - variable non static -> si variable locale, allocation dynamique sur la pile (stack); si
+ * variable au niveau d'une classe = attribut, allocation dynamique sur le tas (heap) lors de la
+ * création d'un objet instance d'une classe avec 'new' + constructeur au sein l'espace total
+ * alloué à l'objet
+ * - allocation sur la pile (stack) seulement lors de l'exec d'une methode  ou d'un bloc
+ * contenant des variables locales;
+ * appel de fonction -> contexte d'appel créé en mémoire sur la pile, a chaque variable
+ * rencontrée un espace mémoire est alloué; les valeurs des vars peuvent etre maj sans re allouer
+ * de l'espace, à la fin du bloc, les espaces alloués aux vars sont libérés, le contexte entier
+ * est libéré; si la methode renvoie un resultat, la valeur est stocké dans la pile à la place du
+ * contexte d'appel
+ * - allocation dynamique sur le tas (heap) seulement pour un objet
+ * - fuites de mémoire sur le tas: occuptation croissante non contrôlée
+ * - le GC s'occupe de libérer la mémoire sur le tas lorsque l'objet qui l'occupe n'est plus
+ * référencé
+ *
+ *
  */
-class Primitives {
+class PrimitivesIntroduction {
 
   public static void main(String[] args) {
     /*
