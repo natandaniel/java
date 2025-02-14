@@ -14,6 +14,11 @@ package classes;
  * <p>Object data can be manipulated through functions called methods, which are defined within
  * the class body.</p>
  * <p>Classes are said to encapsulate data (fields) and behavior (methods).</p>
+ *
+ *
+ * adresse memoire espace alloue qui est stocke dans des variables
+ *
+ * literal null, ne référence aucun objet
  */
 class ClassIntroduction {
 
