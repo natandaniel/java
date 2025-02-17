@@ -1,8 +1,8 @@
 package jdbc;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
@@ -24,10 +24,12 @@ import java.util.List;
 @Configuration
 @EnableJdbcRepositories("jdbc")
 @EnableTransactionManagement
-@PropertySource("classpath:database.properties")
+@PropertySource("classpath:application.properties")
 class JdbcConfiguration extends AbstractJdbcConfiguration {
   @Value("${mysql.host}")
   private String mysqlDatabaseHost;
+  @Value("${mysql.port}")
+  private String mysqlDatabasePort;
   @Value("${mysql.dbname}")
   private String mysqlDatabaseName;
   @Value("${mysql.user}")
@@ -47,12 +49,13 @@ class JdbcConfiguration extends AbstractJdbcConfiguration {
 
   @Bean
   public DataSource mysqlDataSource() {
-    MysqlDataSource mysqlDataSource = new MysqlDataSource();
-    mysqlDataSource.setServerName(mysqlDatabaseHost);
-    mysqlDataSource.setDatabaseName(mysqlDatabaseName);
-    mysqlDataSource.setUser(mysqlDatabaseUser);
-    mysqlDataSource.setPassword(mysqlDatabaseUserPassword);
-    return mysqlDataSource;
+    return DataSourceBuilder.create()
+                            .url("jdbc:mysql://" + mysqlDatabaseHost + ":" + mysqlDatabasePort +
+                                "/" + mysqlDatabaseName)
+                            .username(mysqlDatabaseUser)
+                            .password(mysqlDatabaseUserPassword)
+                            .driverClassName("com.mysql.cj.jdbc.Driver")
+                            .build();
   }
 
   @Override
