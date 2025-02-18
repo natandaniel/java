@@ -9,6 +9,9 @@ package expressions;
  *   <li>binary bitwise AND &</li>
  *   <li>binary bitwise inclusive OR |</li>
  *   <li>binary bitwise exclusive OR ^</li>
+ *   <li>binary left shift <<</li>
+ *   <li>binary signed right shift >></li>
+ *   <li>binary unsigned right shift >>></li>
  * </ul>
  * </p>
  * <p>The operands of a bitwise operation are converted to the <em>int</em> primitive type if no
@@ -38,6 +41,15 @@ package expressions;
  *     </tr>
  *   </table>
  * </figure>
+ * <p>The binary left shift operation inserts <em>n</em> (second operand) zeros to the right of
+ * the binary representation of the first operand, resulting in the loss of its <em>n</em> most
+ * significant bits.</p>
+ * <p>The binary signed right shift operation inserts the most significant bit (leftmost) of the
+ * first operand <em>n</em> (second operand) times to the left of the binary representation of
+ * the first operand, resulting in the loss of its <em>n</em> least significant bits.</p>
+ * <p>The binary unsigned right shift operation inserts <em>n</em> (second operand) zeros to the
+ * left of the binary representation of the first operand, resulting in the loss of its
+ * <em>n</em> least significant bits.</p>
  */
 class BitwiseOperations {
 
@@ -87,11 +99,15 @@ class BitwiseOperations {
     System.out.printf("%d | %d = %d", operand1, operand2, inclusiveOrResult);
     System.out.println("\n");
 
+
     System.out.println("example 4: bitwise exclusive OR");
 
     int exclusiveOrResult = operand1 ^ operand1; // promotion to int type, expected result: 0
     System.out.printf("%d ^ %d = %d", operand1, operand1, exclusiveOrResult);
     System.out.println("\n");
+
+    System.out.println("example 5: left shift");
+
   }
 
 }
