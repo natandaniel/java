@@ -1,35 +1,37 @@
+<!-- TOC -->
+
+* [Jakarta Persistence API Entities](#jakarta-persistence-api-entities)
+    * [1. Definition](#1-definition)
+    * [2. Requirements for Entity Classes](#2-requirements-for-entity-classes)
+    * [3. Persistent Fields and Properties in Entity Classes](#3-persistent-fields-and-properties-in-entity-classes)
+        * [3.1 Supported Persistent Types](#31-supported-persistent-types)
+        * [3.2 Persistent Fields](#32-persistent-fields)
+        * [3.3 Persistent Properties](#33-persistent-properties)
+        * [3.4 Collection-Valued Fields and Properties](#34-collection-valued-fields-and-properties)
+        * [3.5 Map Collections](#35-map-collections)
+        * [3.6 Relationships](#36-relationships)
+        * [3.7 Key Considerations](#37-key-considerations)
+    * [4. Primary Keys](#4-primary-keys)
+        * [4.1 Simple Primary Keys](#41-simple-primary-keys)
+        * [4.2 Composite Primary Keys](#42-composite-primary-keys)
+    * [5. Multiplicity in Entity Relationships](#5-multiplicity-in-entity-relationships)
+        * [5.1 One-to-One](#51-one-to-one)
+        * [5.2 One-to-Many](#52-one-to-many)
+        * [5.3 Many-to-One](#53-many-to-one)
+        * [5.4 Many-to-Many](#54-many-to-many)
+    * [6. Direction in Entity Relationships](#6-direction-in-entity-relationships)
+        * [6.1 Bidirectional Relationships](#61-bidirectional-relationships)
+        * [6.2 Unidirectional Relationships](#62-unidirectional-relationships)
+        * [6.3 Queries and Relationship Direction](#63-queries-and-relationship-direction)
+        * [6.4 Cascade Operations](#64-cascade-operations)
+        * [6.5 Orphan Removal](#65-orphan-removal)
+    * [7. Embeddable Classes in Entities](#7-embeddable-classes-in-entities)
+        * [7.1 Characteristics](#71-characteristics)
+        * [7.2 Composition of Embeddable Classes](#72-composition-of-embeddable-classes)
+        * [7.3 Usage](#73-usage)
 
 <!-- TOC -->
-* [Jakarta Persistence API Entities](#jakarta-persistence-api-entities)
-  * [1. Definition](#1-definition)
-  * [2. Requirements for Entity Classes](#2-requirements-for-entity-classes)
-  * [3. Persistent Fields and Properties in Entity Classes](#3-persistent-fields-and-properties-in-entity-classes)
-    * [3.1 Supported Persistent Types](#31-supported-persistent-types)
-    * [3.2 Persistent Fields](#32-persistent-fields)
-    * [3.3 Persistent Properties](#33-persistent-properties)
-    * [3.4 Collection-Valued Fields and Properties](#34-collection-valued-fields-and-properties)
-    * [3.5 Map Collections](#35-map-collections)
-    * [3.6 Relationships](#36-relationships)
-    * [3.7 Key Considerations](#37-key-considerations)
-  * [4. Primary Keys](#4-primary-keys)
-    * [4.1 Simple Primary Keys](#41-simple-primary-keys)
-    * [4.2 Composite Primary Keys](#42-composite-primary-keys)
-  * [5. Multiplicity in Entity Relationships](#5-multiplicity-in-entity-relationships)
-    * [5.1 One-to-One](#51-one-to-one)
-    * [5.2 One-to-Many](#52-one-to-many)
-    * [5.3 Many-to-One](#53-many-to-one)
-    * [5.4 Many-to-Many](#54-many-to-many)
-  * [6. Direction in Entity Relationships](#6-direction-in-entity-relationships)
-    * [6.1 Bidirectional Relationships](#61-bidirectional-relationships)
-    * [6.2 Unidirectional Relationships](#62-unidirectional-relationships)
-    * [6.3 Queries and Relationship Direction](#63-queries-and-relationship-direction)
-    * [6.4 Cascade Operations](#64-cascade-operations)
-    * [6.5 Orphan Removal](#65-orphan-removal)
-  * [7. Embeddable Classes in Entities](#7-embeddable-classes-in-entities)
-    * [7.1 Characteristics](#71-characteristics)
-    * [7.2 Composition of Embeddable Classes](#72-composition-of-embeddable-classes)
-    * [7.3 Usage](#73-usage)
-<!-- TOC -->
+
 # Jakarta Persistence API Entities
 
 ## 1. Definition
@@ -53,15 +55,18 @@
 
 ## 3. Persistent Fields and Properties in Entity Classes
 
-The persistent state of an entity is accessed through fields or properties. These must follow specific rules and fall under supported types.
+The persistent state of an entity is accessed through fields or properties. These must follow specific rules and fall
+under supported types.
 
 ### 3.1 Supported Persistent Types
+
 - **Primitive types**: `int`, `double`, etc.
 - **Wrapper types**: `Integer`, `Double`, etc.
 - **Strings**: `java.lang.String`.
 - **Date/Time types** (preferred):
     - `java.time.LocalDate`, `java.time.LocalTime`, `java.time.LocalDateTime`, `java.time.OffsetDateTime`.
-    - **Deprecated**: `java.util.Date`, `java.util.Calendar`, `java.sql.Date/Time/Timestamp` (use `java.time` classes instead).
+    - **Deprecated**: `java.util.Date`, `java.util.Calendar`, `java.sql.Date/Time/Timestamp` (use `java.time` classes
+      instead).
 - **Serializable types**: `java.math.BigInteger`, `java.math.BigDecimal`, or custom serializable classes.
 - **Character and Byte Arrays**: Restricted to `byte[]`, `Byte[]`, `char[]`, and `Character[]`.
 - **Enumerated types**.
@@ -69,26 +74,37 @@ The persistent state of an entity is accessed through fields or properties. Thes
 - **Embeddable classes**: Classes annotated with `@Embeddable`.
 
 ### 3.2 Persistent Fields
-- **Field Access**: If annotations are placed on fields (instance variables), they are persisted directly, excluding those marked with `@Transient` or declared `transient`.
+
+- **Field Access**: If annotations are placed on fields (instance variables), they are persisted directly, excluding
+  those marked with `@Transient` or declared `transient`.
 
 ### 3.3 Persistent Properties
-- **Property Access**: If annotations are on getter methods, properties must follow JavaBeans conventions (`getProperty`/`isProperty` for boolean getters, `setProperty` for setters). Properties marked with `@Transient` are excluded from persistence.
+
+- **Property Access**: If annotations are on getter methods, properties must follow JavaBeans conventions (
+  `getProperty`/`isProperty` for boolean getters, `setProperty` for setters). Properties marked with `@Transient` are
+  excluded from persistence.
 
 ### 3.4 Collection-Valued Fields and Properties
-- **Supported Collections**: JPA supports collections such as `Collection`, `Set`, `List`, and `Map`. These may contain either:
+
+- **Supported Collections**: JPA supports collections such as `Collection`, `Set`, `List`, and `Map`. These may contain
+  either:
     - Basic types: Strings, numbers, or enumerated types.
     - Embeddable classes: Types annotated with `@Embeddable`.
-    - Entities: For relationships, collections may contain other entities (see relationships below for additional details).
+    - Entities: For relationships, collections may contain other entities (see relationships below for additional
+      details).
 
 - **Element Collections**:
-    - Collections of basic types or embeddable classes are stored in a **collection table** in the database, mapping these values to the parent entity using a foreign key.
+    - Collections of basic types or embeddable classes are stored in a **collection table** in the database, mapping
+      these values to the parent entity using a foreign key.
     - Use `@ElementCollection` to specify these types.
 
 - **Collections of Entities**:
     - Collections of entities represent standard JPA relationships (e.g., one-to-many or many-to-many).
-    - If a `Map` is used, keys can be basic types, embeddable classes, or entities (see below for Map-specific annotations).
+    - If a `Map` is used, keys can be basic types, embeddable classes, or entities (see below for Map-specific
+      annotations).
 
 ### 3.5 Map Collections
+
 - **Key Types**:
     - Keys in a Map can be basic types, embeddable classes, or other entities.
 - **Annotations for Keys**:
@@ -98,8 +114,10 @@ The persistent state of an entity is accessed through fields or properties. Thes
     - Use `@MapKeyClass` to explicitly define the key class if generics are not used.
     - Use `@MapKey` when the key is a field or property of the target entity being mapped.
 - **Mapping in the Database**:
-    - Basic or embeddable values in Map fields are stored in **collection tables**, with the keys mapped to value columns.
-    - When Map values are entities, **join tables** are used to connect the key and value entities via their foreign keys.
+    - Basic or embeddable values in Map fields are stored in **collection tables**, with the keys mapped to value
+      columns.
+    - When Map values are entities, **join tables** are used to connect the key and value entities via their foreign
+      keys.
 
 | Key Type         | Value Type              | Annotation                                         |
 |------------------|-------------------------|----------------------------------------------------|
@@ -111,6 +129,7 @@ The persistent state of an entity is accessed through fields or properties. Thes
 | No Generics      | Any                     | `@MapKeyClass`                                     |
 
 ### 3.6 Relationships
+
 - **One-to-One**:
     - Uses a foreign key in one of the entity tables to map the relationship.
 - **Many-to-One**:
@@ -123,8 +142,11 @@ The persistent state of an entity is accessed through fields or properties. Thes
     - Can involve additional entity attributes in the join table to model more complex relationships.
 
 ### 3.7 Key Considerations
-- Use **collection tables** for collections of basic or embeddable types. These tables store data as a list associated with the owning entity.
-- Use **join tables** for many-to-many or unidirectional one-to-many relationships to pair entities through their foreign keys.
+
+- Use **collection tables** for collections of basic or embeddable types. These tables store data as a list associated
+  with the owning entity.
+- Use **join tables** for many-to-many or unidirectional one-to-many relationships to pair entities through their
+  foreign keys.
 
 ## 4. Primary Keys
 
