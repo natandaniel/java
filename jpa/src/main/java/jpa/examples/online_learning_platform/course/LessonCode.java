@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Entity
+@Entity(name = "lesson_code_samples")
 @DiscriminatorValue("CODE")
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -16,4 +16,11 @@ public class LessonCode extends LessonContent {
   private String code;
 
   protected LessonCode() {}
+
+  protected LessonCode(Integer id, int order, LessonSection lessonSection, String language,
+      String code) {
+    super(id, order, lessonSection);
+    this.language = language;
+    this.code = code;
+  }
 }

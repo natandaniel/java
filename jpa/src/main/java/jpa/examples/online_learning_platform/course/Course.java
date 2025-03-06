@@ -1,8 +1,9 @@
 package jpa.examples.online_learning_platform.course;
 
-import jakarta.persistence.ElementCollection;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -25,20 +26,12 @@ public class Course extends BaseEntity {
   @Pattern(regexp = "^https?://.*", message = "Invalid URL")
   private String imageUrl;
   private float price;
-  @ElementCollection(fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true, fetch =
+      FetchType.EAGER)
   private List<CourseModule> modules = new ArrayList<>();
 
   protected Course() {
     super();
-  }
-
-  public Course(Integer id, int order, String title, String description, String imageUrl,
-      float price) {
-    super(id, order);
-    this.title = title;
-    this.description = description;
-    this.imageUrl = imageUrl;
-    this.price = price;
   }
 
   void addModule(CourseModule module) {

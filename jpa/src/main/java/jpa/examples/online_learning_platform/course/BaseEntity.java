@@ -14,7 +14,7 @@ public abstract class BaseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   protected Integer id;
-  private int order;
+  private int index;
 
   protected BaseEntity() {}
 
