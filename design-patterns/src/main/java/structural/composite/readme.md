@@ -1,13 +1,9 @@
 # Composite Design Pattern
 
----
-
 ## Intent
 
 Compose objects into tree-like structures to represent part-whole hierarchies. This pattern allows clients to treat
 individual objects and compositions of objects uniformly.
-
----
 
 ## Motivation
 
@@ -18,8 +14,6 @@ individual objects and compositions of objects uniformly.
 - Example: In a GUI framework, a window may contain buttons, text elements, and nested panels. The Composite pattern
   enables uniformly interacting with individual controls and groups of controls.
 
----
-
 ## Applicability
 
 Use the Composite Pattern when:
@@ -27,8 +21,6 @@ Use the Composite Pattern when:
 1. You want to represent part-whole hierarchies of objects.
 2. You want clients to treat individual objects and compositions uniformly (e.g., a file system where files and folders
    are manipulated using the same operations like `add`, `delete`, `getDetails`).
-
----
 
 ## Structure
 
@@ -61,8 +53,6 @@ Use the Composite Pattern when:
        +--------------------+       +--------------------+                 
 ```
 
----
-
 ## Participants
 
 1. **Component**
@@ -81,15 +71,11 @@ Use the Composite Pattern when:
 4. **Client**
     - Uses the `Component` interface to interact with both `Leaf` and `Composite` objects uniformly.
 
----
-
 ## Collaborations
 
 - **Client** interacts with objects through the `Component` interface.
 - **Composite** delegates operations to its child components.
 - **Leaf** handles operations directly without delegation, as it has no children.
-
----
 
 ## Benefits and Drawbacks
 
@@ -105,8 +91,6 @@ Use the Composite Pattern when:
 1. **Design overly general**: No restrictions prevent adding specific component types at compile time (e.g., a folder
    could incorrectly contain a button).
 2. **Excessive flexibility**: Misuse is possible when creating overly loose hierarchies.
-
----
 
 ## Implementation Considerations
 
@@ -125,156 +109,11 @@ Use the Composite Pattern when:
 9. **Choosing the best data structure**: Optimize for your use case (e.g., `List`, `Set`, or `Map` for child
    components).
 
----
-
-## Sample Code: Car Part-Whole Hierarchy
-
-### Explanation:
-- **All operations are defined in the `CarPart` interface** for maximum transparency.
-- **Leaves do not implement child-related operations** such as `addComponent()` or `removeComponent()`. These operations throw `UnsupportedOperationException` by default.
-- **Composites implement child-related operations**, handle their child list, and override `getComposite()` to return `this`.
-
-### Code:
-
-```java
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-// Component Interface
-public interface CarComponent {
-    void assemble();
-
-    default void addComponent(CarPart component) {
-        throw new UnsupportedOperationException("Operation not supported");
-    }
-
-    default void removeComponent(CarPart component) {
-        throw new UnsupportedOperationException("Operation not supported");
-    }
-
-    default List<CarPart> getChildren() {
-        return Collections.emptyList(); // Return an empty list by default
-    }
-
-    default CarPart getComposite() {
-        return null; // Return null by default for leaves
-    }
-}
-
-// Leaf Component
-public class Wheel implements CarPart {
-    @Override
-    public void assemble() {
-        System.out.println("Assembling Wheel");
-    }
-}
-
-// Another Leaf Component
-public class Engine implements CarPart {
-    @Override
-    public void assemble() {
-        System.out.println("Assembling Engine");
-    }
-}
-
-// Composite Component
-public class Chassis implements CarPart {
-    private List<CarPart> components = new ArrayList<>();
-
-    @Override
-    public void assemble() {
-        System.out.println("Assembling Chassis...");
-        for (CarPart component : components) {
-            component.assemble();
-        }
-    }
-
-    @Override
-    public void addComponent(CarPart component) {
-        components.add(component);
-    }
-
-    @Override
-    public void removeComponent(CarPart component) {
-        components.remove(component);
-    }
-
-    @Override
-    public List<CarPart> getChildren() {
-        return components;
-    }
-
-    @Override
-    public CarPart getComposite() {
-        return this; // Return this, as it's a composite
-    }
-}
-
-// Another Composite Component
-public class Car implements CarPart {
-    private List<CarPart> components = new ArrayList<>();
-
-    @Override
-    public void assemble() {
-        System.out.println("Assembling Car...");
-        for (CarPart component : components) {
-            component.assemble();
-        }
-    }
-
-    @Override
-    public void addComponent(CarPart component) {
-        components.add(component);
-    }
-
-    @Override
-    public void removeComponent(CarPart component) {
-        components.remove(component);
-    }
-
-    @Override
-    public List<CarPart> getChildren() {
-        return components;
-    }
-
-    @Override
-    public CarPart getComposite() {
-        return this; // Return this, as it's a composite
-    }
-}
-
-// Client
-public class Client {
-    public static void main(String[] args) {
-        CarPart wheel1 = new Wheel();
-        CarPart wheel2 = new Wheel();
-        CarPart engine = new Engine();
-
-        Chassis chassis = new Chassis();
-        chassis.addComponent(wheel1);
-        chassis.addComponent(wheel2);
-
-        Car car = new Car();
-        car.addComponent(chassis);
-        car.addComponent(engine);
-
-        car.assemble();
-    }
-}
-```
-
----
-
 ## Known Uses
 
 1. **Graphic Editors**: Shapes can contain primitive shapes or groups of shapes (e.g., rectangles inside a layer).
 2. **GUI Frameworks**: Windows, panels, buttons, and nested containers.
 3. **File Systems**: Files and folders organized into a tree-like hierarchy.
-
----
-
----
 
 ## Related Patterns
 
