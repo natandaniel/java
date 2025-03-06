@@ -50,10 +50,3 @@ Discover the following resources to understand and use the project effectively:
 3. [Validating Persistent Fields And Properties](docs/3-validating-persistent-fields-and-properties.md)
 4. [Managing Entities](docs/4-managing-entities.md)
 5. [Persistence XML file](docs/5-persistence-xml-file.md)
-
-## Testing
-
-The project includes both:
-
-- **Development database**: PostgreSQL (via Docker) for application runtime.
-- **Integration tests**: H2 is configured as an in-memory database for faster and isolated testing.
