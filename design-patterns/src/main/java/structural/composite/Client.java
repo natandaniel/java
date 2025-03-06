@@ -1,54 +1,20 @@
 package structural.composite;
 
-import java.util.Iterator;
-import java.util.List;
-
 public class Client {
-
+  
   public static void main(String[] args) {
-    CarComponent car = new CompositeCarComponent(CarComponentType.CAR, "MyCar");
+    CarComponent wheel1 = new Wheel();
+    CarComponent wheel2 = new Wheel();
+    CarComponent engine = new Engine();
 
-    CarComponent chassis =
-        new CompositeCarComponent(CarComponentType.CHASSIS, "Chassis");
-    chassis.add(new IndividualCarComponent(CarComponentType.FRAME, "Frame"));
+    CarComponent chassis = new Chassis();
+    chassis.add(wheel1);
+    chassis.add(wheel2);
 
-    CarComponent body =
-        new CompositeCarComponent(CarComponentType.BODY, "Body");
-
-    for (String doorName :
-        List.of("FrontLeftDoor", "FrontRightDoor", "RearLeftDoor", "RearRightDoor"))
-      body.add(new IndividualCarComponent(CarComponentType.DOOR, doorName));
-
-    for (String windowName :
-        List.of("FrontLeftWindow", "FrontRightWindow", "RearLeftWindow", "RearRightWindow"))
-      body.add(new IndividualCarComponent(CarComponentType.WINDOW, windowName));
-
-    body.add(new IndividualCarComponent(CarComponentType.ROOF, "Roof"));
-    chassis.add(body);
-
-    chassis.add(new CompositeCarComponent(CarComponentType.SUSPENSION, "Suspension"));
-
+    CarComponent car = new Car();
     car.add(chassis);
+    car.add(engine);
 
-    for (String wheelName :
-        List.of("FrontLeftWheel", "FrontRightWheel", "RearLeftWheel", "RearRightWheel"))
-      car.add(new IndividualCarComponent(CarComponentType.WHEEL, wheelName));
-
-    car.add(new CompositeCarComponent(CarComponentType.ENGINE, "MyEngine"));
-
-    display(car);
+    car.assemble();
   }
-
-  private static void display(CarComponent carComponent) {
-    carComponent.display();
-
-    if (carComponent instanceof CompositeCarComponent) {
-      Iterator<CarComponent> componentIterator = carComponent.components();
-
-      while (componentIterator.hasNext()) {
-        display(componentIterator.next());
-      }
-    }
-  }
-
 }

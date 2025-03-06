@@ -129,69 +129,138 @@ Use the Composite Pattern when:
 
 ## Sample Code: Car Part-Whole Hierarchy
 
+### Explanation:
+- **All operations are defined in the `CarPart` interface** for maximum transparency.
+- **Leaves do not implement child-related operations** such as `addComponent()` or `removeComponent()`. These operations throw `UnsupportedOperationException` by default.
+- **Composites implement child-related operations**, handle their child list, and override `getComposite()` to return `this`.
+
+### Code:
+
 ```java
-// Component
-public interface CarPart {
-  void assemble();
-}
-
-// Leaf
-public class Wheel implements CarPart {
-  @Override
-  public void assemble() {
-    System.out.println("Assembling Wheel");
-  }
-}
-
-public class Engine implements CarPart {
-  @Override
-  public void assemble() {
-    System.out.println("Assembling Engine");
-  }
-}
-
-// Composite
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class Car implements CarPart {
-  private List<CarPart> parts = new ArrayList<>();
+// Component Interface
+public interface CarComponent {
+    void assemble();
 
-  public void add(CarPart part) {
-    parts.add(part);
-  }
-
-  public void remove(CarPart part) {
-    parts.remove(part);
-  }
-
-  public List<CarPart> getChildren() {
-    return parts;
-  }
-
-  @Override
-  public void assemble() {
-    System.out.println("Assembling Car...");
-    for (CarPart part : parts) {
-      part.assemble();
+    default void addComponent(CarPart component) {
+        throw new UnsupportedOperationException("Operation not supported");
     }
-  }
+
+    default void removeComponent(CarPart component) {
+        throw new UnsupportedOperationException("Operation not supported");
+    }
+
+    default List<CarPart> getChildren() {
+        return Collections.emptyList(); // Return an empty list by default
+    }
+
+    default CarPart getComposite() {
+        return null; // Return null by default for leaves
+    }
+}
+
+// Leaf Component
+public class Wheel implements CarPart {
+    @Override
+    public void assemble() {
+        System.out.println("Assembling Wheel");
+    }
+}
+
+// Another Leaf Component
+public class Engine implements CarPart {
+    @Override
+    public void assemble() {
+        System.out.println("Assembling Engine");
+    }
+}
+
+// Composite Component
+public class Chassis implements CarPart {
+    private List<CarPart> components = new ArrayList<>();
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling Chassis...");
+        for (CarPart component : components) {
+            component.assemble();
+        }
+    }
+
+    @Override
+    public void addComponent(CarPart component) {
+        components.add(component);
+    }
+
+    @Override
+    public void removeComponent(CarPart component) {
+        components.remove(component);
+    }
+
+    @Override
+    public List<CarPart> getChildren() {
+        return components;
+    }
+
+    @Override
+    public CarPart getComposite() {
+        return this; // Return this, as it's a composite
+    }
+}
+
+// Another Composite Component
+public class Car implements CarPart {
+    private List<CarPart> components = new ArrayList<>();
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling Car...");
+        for (CarPart component : components) {
+            component.assemble();
+        }
+    }
+
+    @Override
+    public void addComponent(CarPart component) {
+        components.add(component);
+    }
+
+    @Override
+    public void removeComponent(CarPart component) {
+        components.remove(component);
+    }
+
+    @Override
+    public List<CarPart> getChildren() {
+        return components;
+    }
+
+    @Override
+    public CarPart getComposite() {
+        return this; // Return this, as it's a composite
+    }
 }
 
 // Client
 public class Client {
-  public static void main(String[] args) {
-    CarPart wheel1 = new Wheel();
-    CarPart wheel2 = new Wheel();
-    CarPart engine = new Engine();
+    public static void main(String[] args) {
+        CarPart wheel1 = new Wheel();
+        CarPart wheel2 = new Wheel();
+        CarPart engine = new Engine();
 
-    Car car = new Car();
-    car.add(wheel1);
-    car.add(wheel2);
-    car.add(engine);
+        Chassis chassis = new Chassis();
+        chassis.addComponent(wheel1);
+        chassis.addComponent(wheel2);
 
-    car.assemble();
-  }
+        Car car = new Car();
+        car.addComponent(chassis);
+        car.addComponent(engine);
+
+        car.assemble();
+    }
 }
 ```
 

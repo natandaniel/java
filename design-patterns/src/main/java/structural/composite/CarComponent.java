@@ -1,17 +1,25 @@
 package structural.composite;
 
-import java.util.Iterator;
+import java.util.Collections;
+import java.util.List;
 
-public interface CarComponent {
-  CarComponentType type();
+interface CarComponent {
+  void assemble();
 
-  String name();
+  default void add(CarComponent component) {
+    throw new UnsupportedOperationException("Operation not supported");
+  }
 
-  void display();
+  default void remove(CarComponent component) {
+    throw new UnsupportedOperationException("Operation not supported");
+  }
 
-  void add(CarComponent carComponent);
+  default List<CarComponent> getChildren() {
+    return Collections.emptyList();
+  }
 
-  void remove(CarComponent carComponent);
+  default CarComponent getComposite() {
+    return null; // Return null by default for leaves
+  }
 
-  Iterator<CarComponent> components();
 }
