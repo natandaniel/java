@@ -1,4 +1,4 @@
-# Online Learning Platform Course Domain
+# Online Learning
 
 This sample code explores modeling approaches for course content management in an online learning platform. It showcases
 different strategies for storing and managing lesson content efficiently using JPA.
