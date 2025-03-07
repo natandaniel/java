@@ -14,7 +14,7 @@ public class CourseIntegrationTest {
 
   @BeforeAll
   static void setupEntityManagerFactory() {
-    entityManagerFactory = Persistence.createEntityManagerFactory("test-persistence-unit");
+    entityManagerFactory = Persistence.createEntityManagerFactory("test-persistence-unit-v1");
   }
 
   @AfterEach

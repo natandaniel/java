@@ -1,7 +1,7 @@
 package jpa.examples.online_learning_platform.course.v2;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -20,8 +20,8 @@ public class Lesson extends BaseEntity {
   private String description;
   @ManyToOne
   private CourseModule module;
-  @Column(columnDefinition = "jsonb")
-  private String content; // Flexible JSON for sections and contents
+  @Lob
+  private String content;
 
   protected Lesson() {}
 
