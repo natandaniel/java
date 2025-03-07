@@ -1,7 +1,6 @@
 # Jakarta Persistence API Examples
 
-This project demonstrates key concepts of the **Jakarta Persistence API (JPA)**, allowing smooth interaction between
-Java applications and relational databases.
+This project demonstrates key concepts of the **Jakarta Persistence API (JPA)** through real world examples.
 
 ## Features
 
@@ -11,39 +10,9 @@ Java applications and relational databases.
 - Configure persistence with PostgreSQL for development and production.
 - Use **H2**, an in-memory database, for integration tests.
 
-## Prerequisites
-
-Before starting, make sure you have the following installed:
-
-- **JDK 17** or higher.
-- **Docker** to set up PostgreSQL.
-- An IDE such as **IntelliJ IDEA** for running and editing the code.
-
-## Setup and Configuration
-
-1. **Clone the repository** to your local environment:
-
-   ```bash
-   git clone <REPOSITORY_URL>
-   cd <PROJECT_NAME>
-   ```
-
-2. **Start a PostgreSQL container** using Docker:
-
-   ```bash
-   docker run --name jpa-tests-postgres \
-       -e POSTGRES_USER=admin \
-       -e POSTGRES_PASSWORD=secret \
-       -e POSTGRES_DB=test \
-       -p 5432:5432 \
-       -d postgres:latest
-   ```
-
-3. Import the project into your IDE and run the provided example code to explore JPA features.
-
 ## Documentation
 
-Discover the following resources to understand and use the project effectively:
+The following resources help understand how to use JPA:
 
 1. [Entity Mapping](docs/1-entity.md)
 2. [Entity Inheritance](docs/2-entity-inheritance.md)
