@@ -5,14 +5,14 @@
     <persistence-unit name="test-persistence-unit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>jpa.examples.online_learning_platform.course.Course</class>
-        <class>jpa.examples.online_learning_platform.course.CourseModule</class>
-        <class>jpa.examples.online_learning_platform.course.Lesson</class>
-        <class>jpa.examples.online_learning_platform.course.LessonSection</class>
-        <class>jpa.examples.online_learning_platform.course.LessonContent</class>
-        <class>jpa.examples.online_learning_platform.course.LessonText</class>
-        <class>jpa.examples.online_learning_platform.course.LessonCode</class>
-        <class>jpa.examples.online_learning_platform.course.LessonFigure</class>
+        <class>jpa.examples.online_learning_platform.course.v1.Course</class>
+        <class>jpa.examples.online_learning_platform.course.v1.CourseModule</class>
+        <class>jpa.examples.online_learning_platform.course.v1.Lesson</class>
+        <class>jpa.examples.online_learning_platform.course.v1.LessonSection</class>
+        <class>jpa.examples.online_learning_platform.course.v1.LessonContent</class>
+        <class>jpa.examples.online_learning_platform.course.v1.LessonText</class>
+        <class>jpa.examples.online_learning_platform.course.v1.LessonCode</class>
+        <class>jpa.examples.online_learning_platform.course.v1.LessonFigure</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>

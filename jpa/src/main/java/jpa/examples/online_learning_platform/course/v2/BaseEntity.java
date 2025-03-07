@@ -1,4 +1,4 @@
-package jpa.examples.online_learning_platform.course;
+package jpa.examples.online_learning_platform.course.v2;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
