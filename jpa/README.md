@@ -1,4 +1,4 @@
-# Jakarta Persistence API examples
+# Jakarta Persistence API Examples
 
 This project demonstrates key concepts of the **Jakarta Persistence API (JPA)**, allowing smooth interaction between
 Java applications and relational databases.
