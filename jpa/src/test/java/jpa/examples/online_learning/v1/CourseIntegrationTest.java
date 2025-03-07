@@ -37,6 +37,7 @@ public class CourseIntegrationTest {
   @BeforeEach
   void setupEntityManager() {
     entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
   }
 
   @AfterAll
