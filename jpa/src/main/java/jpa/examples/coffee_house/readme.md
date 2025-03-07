@@ -1,6 +1,6 @@
-# Coffee House JPA Sample Project
+# Coffee House
 
-This sample project leverages JPA features to model and manage the domain of a Coffee House business. It includes
+This sample code leverages JPA features to model and manage the domain of a Coffee House business. It includes
 various classes, relationships, and configurations to demonstrate the flexibility and capabilities of JPA.
 
 ## Features Explored
