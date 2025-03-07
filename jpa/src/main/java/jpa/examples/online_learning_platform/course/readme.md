@@ -1,50 +1,61 @@
 # Online Learning Platform Course Domain
 
-Here I explore two distinct modeling approaches for managing course content in an online learning platform: **explicit
-modeling** (v1) and **JSON-based modeling** (v2).
+This sample code explores modeling approaches for course content management in an online learning platform.
 
----
+## v1: Explicit modeling
 
-## v1: Explicit Modeling
-
-In **v1**, a structured, type-safe approach is used with polymorphism and inheritance.
+In **v1**, a structured, type-safe approach is implemented using polymorphism and inheritance.
 
 ### Structure
 
-- `LessonContent` is an abstract class with specific subtypes:
-    - `LessonText` (text content)
-    - `LessonCode` (code examples with `language` and `code`)
-    - `LessonFigure` (figures with `alt`, `title`, and `url`)
-- `LessonSection` organizes contents hierarchically.
-- Relations between entities are modeled using `@OneToMany` and `@ManyToOne`.
+- `LessonContent` is an abstract class representing a general content type, with specific subtypes:
+    - `LessonText` – Represents textual content.
+    - `LessonCode` – Represents code examples (`language` and `code`).
+    - `LessonFigure` – Represents figures, such as images, with fields like `alt`, `title`, and `url`.
+- `LessonSection` organizes `LessonContent` into hierarchical sections within a lesson.
+- Relations between entities are modeled using JPA annotations like `@OneToMany` and `@ManyToOne`.
 
 ### Pros
 
-- Strong validation and clear responsibilities through explicit types.
-- Extensible with behavior unique to each content type.
+- **Strong validation**: Each content type is represented explicitly for stricter validations.
+- **Clear structure**: Separate types make responsibilities distinct and well-defined.
+- **Extensibility**: Behavior unique to specific content types can easily be added.
 
 ### Cons
 
-- Complex database schema with multiple tables (`lesson_texts`, `lesson_code_samples`, etc.).
-- Adding new content types requires schema changes.
+- **Complex schema**: Requires multiple tables for different content types (`lesson_texts`, `lesson_code_samples`,
+  etc.).
+- **Rigid**: Adding new content types requires schema changes and extensive adjustments.
 
----
+## v2: Single text unit stored in `@Lob`
 
-## v2: JSON Stored in `@Lob`
-
-In **v2**, a simpler, more flexible approach stores lesson content directly as JSON in a single field.
+In **v2**, the model is simplified by storing the lesson content directly as text in a single database field.
 
 ### Structure
 
-- The `Lesson` entity combines metadata (e.g., `title`, `description`) with a `content` field stored as a JSON string
-  using `@Lob`.
+- The `Lesson` entity contains:
+    - Metadata such as `title` and `description`.
+    - A `content` field, which uses `@Lob` to store data representing all types of lesson content.
+
+### What is `@Lob`?
+
+- `@Lob` (Large Object) is a JPA annotation used to store large amounts of data.
+- In this sample code, the `content` field leverages `@Lob` to store data as a `CLOB` (Character Large Object), enabling
+  flexible storage of structured JSON strings.
 
 ### Pros
 
-- Simple schema with one `Lesson` table.
-- Highly flexible: Adding new content types does not require schema changes.
+- **Simple schema**: All lesson data is contained within a single `Lesson` entity and table.
+- **Flexible**: New content types can be added or updated without altering the database schema.
+- **Efficient**: Eliminates the need for multiple joins during queries.
 
 ### Cons
 
-- Relies on JSON validation in the application, which is less strict than type-based modeling.
-- Limited SQL query capabilities since content is stored as unstructured data.
+- **Weaker validation**: Validation of text structure must be handled at the application level, as the database does not
+  provide built-in constraints for validating the format or structure.
+- **Limited querying**: Text content, like JSON, cannot be natively queried within traditional SQL databases. Advanced
+  queries may require additional processing or custom logic.
+- **Risk of inconsistencies**: Without a strict schema or database-level validation, there is a higher risk of
+  inconsistencies in how the content is stored and interpreted.
+- **Potential performance issues**: Handling very large text fields could lead to performance degradation for certain
+  database operations, such as updates or searches.
