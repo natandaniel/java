@@ -1,4 +1,4 @@
-package jpa.examples.online_learning_platform.course.v3;
+package jpa.examples.online_learning.v3;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

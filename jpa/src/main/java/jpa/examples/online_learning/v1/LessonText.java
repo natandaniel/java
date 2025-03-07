@@ -1,4 +1,4 @@
-package jpa.examples.online_learning_platform.course.v1;
+package jpa.examples.online_learning.v1;
 
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;

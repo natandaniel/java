@@ -5,14 +5,14 @@
     <persistence-unit name="local-persistence-unit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>jpa.examples.online_learning_platform.course.v1.Course</class>
-        <class>jpa.examples.online_learning_platform.course.v1.CourseModule</class>
-        <class>jpa.examples.online_learning_platform.course.v1.Lesson</class>
-        <class>jpa.examples.online_learning_platform.course.v1.LessonSection</class>
-        <class>jpa.examples.online_learning_platform.course.v1.LessonContent</class>
-        <class>jpa.examples.online_learning_platform.course.v1.LessonText</class>
-        <class>jpa.examples.online_learning_platform.course.v1.LessonCode</class>
-        <class>jpa.examples.online_learning_platform.course.v1.LessonFigure</class>
+        <class>jpa.examples.online_learning.v1.Course</class>
+        <class>jpa.examples.online_learning.v1.CourseModule</class>
+        <class>jpa.examples.online_learning.v1.Lesson</class>
+        <class>jpa.examples.online_learning.v1.LessonSection</class>
+        <class>jpa.examples.online_learning.v1.LessonContent</class>
+        <class>jpa.examples.online_learning.v1.LessonText</class>
+        <class>jpa.examples.online_learning.v1.LessonCode</class>
+        <class>jpa.examples.online_learning.v1.LessonFigure</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/test"/>

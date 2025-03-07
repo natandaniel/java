@@ -1,4 +1,4 @@
-package jpa.examples.online_learning_platform.course.v2;
+package jpa.examples.online_learning.v3;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
