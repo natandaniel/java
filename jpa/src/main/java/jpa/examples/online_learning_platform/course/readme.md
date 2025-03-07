@@ -6,8 +6,6 @@ This package models some entities and their relationships for an online learning
 Courses, Modules, Lessons, Lesson Sections, and their associated content types, while
 ensuring the system remains extensible, maintainable, and aligned with best practices in JPA and domain-driven design.
 
----
-
 ## Key Design Choices
 
 ### 1. **BaseEntity Inheritance**
@@ -18,8 +16,6 @@ ensuring the system remains extensible, maintainable, and aligned with best prac
     - All entities inherit these attributes for consistency.
 - **Impact**: This allows uniform ID generation (`GenerationType.IDENTITY`) and indexing functionality across various
   tables, fostering easier maintenance.
-
----
 
 ### 2. **Separation of Concerns in Course Structure**
 
@@ -34,8 +30,6 @@ The course structure follows a hierarchical design:
     - Provides a clear hierarchy to organize the learning content.
     - Facilitates future scalability, e.g., adding course progress tracking or prerequisites at any level.
 
----
-
 ### 3. **LessonContent Abstraction**
 
 - **What**: Abstract class `LessonContent` representing different types of content in a lesson section.
@@ -46,10 +40,11 @@ The course structure follows a hierarchical design:
 - **Why**:
     - Abstracting content allows **polymorphic behavior** while separating data concerns.
     - Using `@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)` minimizes table joins when querying content.
+    - The ID generation strategy `@GeneratedValue(strategy = GenerationType.TABLE)` is applied here to ensure unique
+      identifiers for each subclass across separate tables.
 - **Impact**:
     - Easier to introduce new content types in the future by simply creating a new class inheriting `LessonContent`.
-
----
+    - Unique identifiers are maintained efficiently across the polymorphic hierarchy.
 
 ### 4. **Bidirectional Relationships**
 
@@ -69,8 +64,6 @@ The course structure follows a hierarchical design:
     - Navigation between entities is seamless in both directions.
     - Maintenance remains straightforward, as cascading simplifies entity lifecycle management.
 
----
-
 ### 5. **Validation and Constraints**
 
 - Validation annotations are used to enforce data integrity:
@@ -80,8 +73,6 @@ The course structure follows a hierarchical design:
 - **Impact**:
     - Guards against invalid input and ensures that persisted data adheres to business rules.
 
----
-
 ### 6. **Organized Storage of Lessons and Their Components**
 
 - **LessonSection** includes:
@@ -89,8 +80,6 @@ The course structure follows a hierarchical design:
     - Associated lesson content (`LessonContent`) to store diverse content formats.
 - **Impact**:
     - Provides the ability to represent complex lessons with rich content, subsections, or even nested structures.
-
----
 
 ## Key Considerations
 
@@ -110,8 +99,6 @@ The course structure follows a hierarchical design:
 
 - Leveraging JPA inheritance (`@Inheritance`) avoids duplicating content logic while ensuring table-level clarity.
 - Using cascades and `orphanRemoval` reduces manual management of related entities in the database.
-
----
 
 ## Conclusion
 
