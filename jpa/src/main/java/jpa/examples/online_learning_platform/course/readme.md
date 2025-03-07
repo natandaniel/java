@@ -1,9 +1,9 @@
-# Course Subpackage - Design Choices Overview
+# Online learning platform Course domain
 
 ## Introduction
 
-The `course` subpackage models the key entities and their relationships for an online learning platform. This package is
-responsible for representing Courses, Modules, Lessons, Lesson Sections, and their associated content types, while
+This package models some entities and their relationships for an online learning platform course domain. It represents
+Courses, Modules, Lessons, Lesson Sections, and their associated content types, while
 ensuring the system remains extensible, maintainable, and aligned with best practices in JPA and domain-driven design.
 
 ---
