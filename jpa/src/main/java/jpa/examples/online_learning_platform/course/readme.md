@@ -59,3 +59,30 @@ In **v2**, the model is simplified by storing the lesson content directly as tex
   inconsistencies in how the content is stored and interpreted.
 - **Potential performance issues**: Handling very large text fields could lead to performance degradation for certain
   database operations, such as updates or searches.
+
+## v3: Lesson content stored as a URL
+
+In **v3**, we introduce a solution where the lesson content itself is hosted externally (e.g., on a blob storage
+service), and only the URL to the content is persisted in the database.
+
+### Structure
+
+- The `Lesson` entity in the database stores:
+    - Metadata like `title` and `description`.
+    - A `contentUrl` field that references the externally hosted HTML file for the lesson.
+
+- Static files, such as HTML content, images, and videos, are uploaded separately to an object storage solution (e.g.,
+  AWS S3, Azure Blob Storage).
+
+### Pros
+
+- **Separation of Concerns**: Content hosting is offloaded to a scalable, performant blob storage system, while the
+  database focuses solely on metadata.
+- **Scalable**: Blob storage systems are optimized for high-performance and large-scale content delivery.
+- **Simpler schema**: The database model is leaner and only tracks basic metadata and external URLs.
+- **Content updates**: Easy to update hosted content without changing the database schema or data.
+
+### Cons
+
+- **Cannot search hosted content**: Lesson content cannot be natively queried or indexed in SQL.
+- **Storage dependency**: External storage services must be configured, managed, and secured.
