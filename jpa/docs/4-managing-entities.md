@@ -21,15 +21,11 @@
    5.2 [Packaging Persistence Units](#52-packaging-persistence-units)
 6. [Summary](#6-summary)
 
----
-
 ## 1. Introduction
 
 The **EntityManager** in Java EE provides APIs for the persistence of Java objects (Entities). It works within a *
 *persistence context**, which manages the lifecycle of entities. Entity instances interact with the database via the
 EntityManager and can exist in one of four states: **New**, **Managed**, **Detached**, and **Removed**.
-
----
 
 ## 2. EntityManager Interface
 
@@ -44,15 +40,11 @@ how EntityManager operates in different modes.
 3. **Detached**: Entity exists but is no longer associated with any active persistence context.
 4. **Removed**: Entity is scheduled for deletion from the database.
 
----
-
 ### 2.2 Container-Managed EntityManagers
 
 1. Persistence context is automatically propagated in a JTA (Java Transaction API) transaction.
 2. Lifecycle management is handled by the container.
 3. Inject `EntityManager` directly with `@PersistenceContext`.
-
----
 
 ### 2.3 Application-Managed EntityManagers
 
@@ -60,34 +52,24 @@ how EntityManager operates in different modes.
 2. Each EntityManager instance creates its own persistence context.
 3. Use `EntityManagerFactory` for creation and management.
 
----
-
 ## 3. Entity Lifecycle Operations
 
 ### 3.1 Persisting Entities
 
 Use the `persist()` method to make an entity **managed** and add it to the database.
 
----
-
 ### 3.2 Finding Entities by Primary Key
 
 Retrieve an entity by its primary key using the `find()` method. If the entity is in a detached state or doesn’t exist,
 null is returned.
 
----
-
 ### 3.3 Updating Entities (Merge)
 
 Use the `merge()` method to copy changes from a detached entity to the persistence context.
 
----
-
 ### 3.4 Removing Entities
 
 Use the `remove()` method to mark an entity for deletion during the next transaction synchronization.
-
----
 
 ### 3.5 Using Transactions
 
@@ -95,14 +77,10 @@ Operations such as `persist()`, `merge()`, and `remove()` require an active tran
 provides methods to begin, commit, and roll back transactions manually (in the case of application-managed
 transactions).
 
----
-
 ## 4. Synchronization, Flushing, and Clearing
 
 In this section, we discuss how to manually control the synchronization of the persistence context with the database and
 manage memory by detaching entities.
-
----
 
 ### 4.1 Flushing Changes to the Database
 
@@ -114,8 +92,6 @@ Example:
 ```java
 em.flush();
 ```
-
----
 
 ### 4.2 Clearing the Persistence Context
 
@@ -169,8 +145,6 @@ clear();
         }
 ```
 
----
-
 ## 5. Persistence Units
 
 A **persistence unit** defines all entities managed by the persistence layer and is configured in the `persistence.xml`
@@ -182,13 +156,9 @@ file.
 - **classes**: Lists the explicitly managed entity classes.
 - **properties**: Database-related configuration parameters.
 
----
-
 ### 5.2 Packaging Persistence Units
 
 - Persistence units can be packaged as part of a deployable archive, e.g., `WAR` or `EAR`.
-
----
 
 ## 6. Summary
 
