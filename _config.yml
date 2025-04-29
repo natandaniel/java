@@ -1,14 +1,10 @@
-title: Java Learning Repository
+title: Java Documentation
 description: Comprehensive Java documentation and examples
-baseurl: "/java" # the subpath of your site, e.g. /blog
-url: "https://natandaniel.github.io" # the base hostname & protocol for your site
+baseurl: "/java"
+url: "https://natandaniel.github.io"
 
 # Build settings
-remote_theme: jekyll/minima
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-remote-theme
+theme: jekyll-theme-cayman
 
 # Exclude from processing
 exclude:
