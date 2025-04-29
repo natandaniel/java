@@ -18,4 +18,22 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.11.2</version>
+                <configuration>
+                    <outputDirectory>${project.basedir}/../docs/language-basics</outputDirectory>
+                    <doctitle>Java Language Basics</doctitle>
+                    <windowtitle>Java Language Basics</windowtitle>
+                    <show>private</show>
+                    <source>${maven.compiler.source}</source>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
