@@ -1,0 +1,20 @@
+title: Java Documentation
+description: Comprehensive Java documentation and examples
+baseurl: "/java"
+url: "https://natandaniel.github.io"
+
+# Build settings
+theme: jekyll-theme-cayman
+
+# Enable SCSS processing
+sass:
+  style: compressed
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
+  - .gitignore
