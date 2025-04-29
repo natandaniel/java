@@ -3,18 +3,8 @@ description: Comprehensive Java documentation and examples
 baseurl: "/java"
 url: "https://natandaniel.github.io"
 
-# Build settings
-theme: jekyll-theme-cayman
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+- jekyll-remote-theme
 
-# Enable SCSS processing
-sass:
-  style: compressed
 
-# Exclude from processing
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - vendor
-  - .git
-  - .gitignore
